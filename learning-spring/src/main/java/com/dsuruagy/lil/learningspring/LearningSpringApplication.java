@@ -7,6 +7,8 @@ import com.dsuruagy.lil.learningspring.data.repository.GuestRepository;
 import com.dsuruagy.lil.learningspring.data.repository.ReservationRepository;
 import com.dsuruagy.lil.learningspring.data.repository.RoomRepository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 public class LearningSpringApplication {
+	private static Logger logger = 
+		LoggerFactory.getLogger(LearningSpringApplication.class.getName());
 
 	public static void main(String[] args) {
+		logger.info("ENCODING: " + System.getProperty("file.encoding"));
 		SpringApplication.run(LearningSpringApplication.class, args);
 	}
 
