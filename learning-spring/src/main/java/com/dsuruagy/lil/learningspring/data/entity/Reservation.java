@@ -1,6 +1,6 @@
 package com.dsuruagy.lil.learningspring.data.entity;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,5 +29,5 @@ public class Reservation {
     private long guestId;
 
     @Column(name = "RES_DATE")
-    private LocalDate date;
+    private Date date;
 }

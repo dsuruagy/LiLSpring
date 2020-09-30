@@ -43,7 +43,7 @@ public class ReservationService {
         });
 
         Iterable<Reservation> reservations = 
-            reservationRepository.findReservationByReservationDate(new java.sql.Date(date.toEpochDay()));
+            reservationRepository.findReservationByDate(java.sql.Date.valueOf(date));
         reservations.forEach(reservation -> {
             RoomReservation roomReservation = roomReservationMap.get(reservation.getRoomId());
             roomReservation.setDate(date);
