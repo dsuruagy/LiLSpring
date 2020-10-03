@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "learning-spring"
+		},
+		{
+			"path": "bootEssentials/initial-boot-app"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
