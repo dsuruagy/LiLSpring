@@ -2,7 +2,6 @@ package com.dsuruagy.lil.learningspring.web;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import com.dsuruagy.lil.learningspring.business.domain.RoomReservation;
 import com.dsuruagy.lil.learningspring.business.service.ReservationService;
