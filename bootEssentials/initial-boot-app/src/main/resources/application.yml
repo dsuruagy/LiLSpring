@@ -1,3 +1,10 @@
+server:
+  ssl:
+    key-store: classpath:keystore.jks
+    key-store-password: password
+    key-store-type: JKS
+    key-alias: linkedin
+---
 spring:
     profiles: dev
 server:
