@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "bootEssentials/initial-boot-app"
+		},
+		{
+			"path": "bootEssentials/room-web-app"
 		}
 	],
 	"settings": {
