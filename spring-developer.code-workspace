@@ -1,13 +1,14 @@
 {
 	"folders": [
 		{
-			"path": "learning-spring"
-		},
-		{
 			"path": "bootEssentials/initial-boot-app"
 		},
 		{
 			"path": "bootEssentials/room-web-app"
+		},
+		{
+			"name": "room-clr-app",
+			"path": "bootEssentials/room-clr-app"
 		}
 	],
 	"settings": {
