@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Landon Hotel | Login</title>
+</head>
+<body>
+    <form th:action="@{/login}" method="POST">
+        <div>
+            <label for="username">User Name:</label>
+            <input type="text" name="username"/>
+            <label for="password">Password:</label>
+            <input type="password" name="password"/>
+        </div>
+        <div><input type="submit" value="login"></div>
+    </form>
+</body>
+</html>
