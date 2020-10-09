@@ -9,6 +9,9 @@
 		{
 			"name": "room-clr-app",
 			"path": "bootEssentials/room-clr-app"
+		},
+		{
+			"path": "bootEssentials/room-cleaner-consumer"
 		}
 	],
 	"settings": {
