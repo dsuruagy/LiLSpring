@@ -1,9 +1,8 @@
 package com.frankmoley.lil.fid.aspect;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,10 +23,17 @@ public class LoggingAspect {
 
     }
 
-    @Before("executeLogging()") // an advice annotation, referring to the pointcut signature
-    public void logMethodCall(JoinPoint joinPoint) {
+    // an advice annotation, referring to the pointcut signature
+    @Around("executeLogging()")
+    public Object logMethodCall(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        long startTime = System.currentTimeMillis();
+        Object returnValue = joinPoint.proceed();
+        long totalTime = System.currentTimeMillis() - startTime;
+
         StringBuilder message = new StringBuilder("Method: ");
         message.append(joinPoint.getSignature().getName());
+        message.append(" totalTime: ").append(totalTime).append("ms");
         Object[] args = joinPoint.getArgs();
 
         if(null != args && args.length > 0){
@@ -36,19 +42,15 @@ public class LoggingAspect {
                     message.append(arg).append(" | "));
             message.append("]");
         }
-        LOGGER.info(message.toString());
-    }
 
-    // an advice annotation, referring to the pointcut signature
-    @AfterReturning(value = "executeLogging()", returning = "returnValue")
-    public void logMethodReturning(JoinPoint joinPoint, Object returnValue) {
-        StringBuilder message = new StringBuilder();
         if(returnValue instanceof Collection) {
-            message.append("Returning: ")
+            message.append(", returning: ")
                     .append(((Collection) returnValue).size()).append(" instances.");
         } else {
-            message.append("Returning: ").append(returnValue.toString());
+            message.append(", returning: ").append(returnValue.toString());
         }
         LOGGER.info(message.toString());
+
+        return returnValue;
     }
 }
