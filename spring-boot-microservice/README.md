@@ -8,9 +8,9 @@
     TourRepository
     TourPackageRepository
     
-2.4 import service package and classes from exercise file
+2.3 import service package and classes from exercise file
 
-2.5 Add references to repositories and change methods in the services
+2.4 Add references to repositories and change methods in the services
     TourPackageService
         createTourPackage(..) - findById orElse save
         lookup() - findAll() 
@@ -19,3 +19,7 @@
         createTour(..) - findById(tourPackage) orElseThrow RuntimeException
                         - save a new Tour
         total() - count()
+        
+2.5 Because the main class doesn't have access to the services, because of its static context, we'll 
+change the ExplorecalApplication to implement CommandLineRunner.
+    Correcting repository code to find by name, instead of code.        

@@ -2,11 +2,13 @@ package com.example.ec;
 
 import com.example.ec.domain.Difficulty;
 import com.example.ec.domain.Region;
+import com.example.ec.domain.TourPackage;
 import com.example.ec.service.TourPackageService;
 import com.example.ec.service.TourService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -18,7 +20,7 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
 import static com.fasterxml.jackson.annotation.PropertyAccessor.FIELD;
 
 @SpringBootApplication
-public class ExplorecalApplication {
+public class ExplorecalApplication implements CommandLineRunner {
 
     @Autowired
     private TourPackageService tourPackageService;
@@ -30,8 +32,8 @@ public class ExplorecalApplication {
         SpringApplication.run(ExplorecalApplication.class, args);
     }
 
-
-    private void loadToursAtStartup() throws IOException {
+    @Override
+    public void run(String... args) throws Exception {
         //Create the Tour Packages
         createTourPackages();
         long numOfPackages = tourPackageService.total();
@@ -83,7 +85,7 @@ public class ExplorecalApplication {
         //reader
         static List<TourFromFile> read(String fileToImport) throws IOException {
             return new ObjectMapper().setVisibility(FIELD, ANY).
-                    readValue(new FileInputStream(fileToImport), new TypeReference<List<TourFromFile>>() {});
+                    readValue(new FileInputStream(fileToImport), new TypeReference<>() {});
         }
         protected TourFromFile(){}
 
