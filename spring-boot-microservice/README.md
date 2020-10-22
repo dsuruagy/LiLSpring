@@ -89,3 +89,7 @@ It is possible to control API exposure, using the following annotations:
     @RestResource(exported = false) method annotation
     
 It can be accomplished on overridden methods from CrudRepository, for example. After that, when we try to use a method not exported, we should receive the status "405 Method Not Allowed".
+
+### 3.6 HAL browser
+The API documentation can be viewed on the http://localhost:8080/profile, although it is very ugly. 
+To provide better visualization, we could use the HAL browser. HAL comes from JSON Hypertext Application Language and is a simple format that gives a consistent and easy way to hyperlink between resources in our API.
