@@ -81,3 +81,11 @@ TourService
  
     http://localhost:8080/tours?size=3&page=0&sort=title
     http://localhost:8080/tours/search/findByTourPackageCode?code=BC&page=1&size=3
+    
+### 3.5 Controlling API exposure
+It is possible to control API exposure, using the following annotations:
+
+    @RepositoryRestResource(exported = false) class annotation
+    @RestResource(exported = false) method annotation
+    
+It can be accomplished on overridden methods from CrudRepository, for example. After that, when we try to use a method not exported, we should receive the status "405 Method Not Allowed".
