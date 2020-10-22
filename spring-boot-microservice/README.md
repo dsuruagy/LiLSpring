@@ -75,3 +75,9 @@ TourService
     http://localhost:8080/tourPackages/search/findByName?name=Backpack%20Cal
  
  To show it, we should implement a new method on TourRepository to return Tours based on TourPackage code.
+ 
+ ### 3.4 Paging and Sorting
+ To implement paging and sorting, it is possible to paginate between the results and use URLs like below. Note the pages metadata and navigation links at the end of the JSON:
+ 
+    http://localhost:8080/tours?size=3&page=0&sort=title
+    http://localhost:8080/tours/search/findByTourPackageCode?code=BC&page=1&size=3
