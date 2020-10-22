@@ -67,3 +67,11 @@ TourService
  
  
     TourPackageRepository.deleteById(String code)
+    
+ ### 3.3 Explore the /search resource
+ Every entity created in Spring Data REST exposes the /search endpoint. 
+ Accessing http://localhost:8080/tourPackages/search, the findByName method, implemented on previous steps should be used:
+ 
+    http://localhost:8080/tourPackages/search/findByName?name=Backpack%20Cal
+ 
+ To show it, we should implement a new method on TourRepository to return Tours based on TourPackage code.
