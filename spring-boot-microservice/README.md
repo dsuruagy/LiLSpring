@@ -93,3 +93,49 @@ It can be accomplished on overridden methods from CrudRepository, for example. A
 ### 3.6 HAL browser
 The API documentation can be viewed on the http://localhost:8080/profile, although it is very ugly. 
 To provide better visualization, we could use the HAL browser. HAL comes from JSON Hypertext Application Language and is a simple format that gives a consistent and easy way to hyperlink between resources in our API.
+
+## Chapter 4 - Expose RESTful APIs with Spring MVC
+### 4.1 Choosing the right framework
+It is useful to expose API with Spring MVC when we have any of these needs:
+* Not using Spring Dara repositories
+* API launches an algorithm
+* Hide internal data model (entity schema)
+* Require business layer service
+
+
+    @RestController
+    @RequestMapping(path = "/examples")
+    public class ExampleController{
+    ...
+    }
+    
+To **create** a resource Example, we should annotate the method. The @RequestBody maps a request parameter to a Java object:
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Example create(@RequestBody Example example)
+    
+To **read** use the following annotations:
+
+    // return all
+    @GetMapping
+    public List<Example> getAllExamples()
+    
+    // return one
+    @GetMapping(path = "/{id}")
+    public Example getOneExample(@PathVariable(value = "id") int id)
+    
+To **update** we should use:
+
+    @PutMapping(path = "/{id}")
+    public Example updateAll(@PathVariable(value = "id") int id,
+        RequestBody Example example)
+        
+    @PatchMapping(path = "/{id}")
+    public Example updateSome(@PathVariable(value = "id") int id,
+            RequestBody Example example)
+            
+To **delete** use:
+
+    @DeleteMapping(path = "/{id}")
+    public Example delete(@PathVariable(value = "id") int id)
