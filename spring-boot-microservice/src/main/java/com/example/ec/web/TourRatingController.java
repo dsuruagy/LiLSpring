@@ -11,7 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * Tour Rating Controller
@@ -39,13 +42,32 @@ public class TourRatingController {
     @Validated
     public TourRating createTourRating(@RequestBody @Valid RatingDto dto,
                                        @PathVariable(value="tourId") Integer tourId) {
-        Tour tour = tourRepository.findById(tourId)
-                .orElseThrow(() -> new NoSuchElementException("Tour not find with id " + tourId));
 
-        TourRatingPk tourRatingPk = new TourRatingPk(tour, dto.getCustomerId());
+        TourRatingPk tourRatingPk = new TourRatingPk(verifyTour(tourId), dto.getCustomerId());
         TourRating tourRating = new TourRating(tourRatingPk, dto.getScore(), dto.getComment());
 
         return tourRatingRepository.save(tourRating);
+    }
+
+    private Tour verifyTour(Integer tourId) {
+        return tourRepository.findById(tourId)
+                .orElseThrow(() -> new NoSuchElementException("Tour not find with id " + tourId));
+    }
+
+    @GetMapping
+    public List<RatingDto> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId) {
+        verifyTour(tourId);
+        return tourRatingRepository.findByPkTourId(tourId).stream()
+                .map(RatingDto::new).collect(Collectors.toList());
+    }
+
+    @GetMapping("/average")
+    public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId){
+        verifyTour(tourId);
+        return Map.of("average", tourRatingRepository.findByPkTourId(tourId).stream()
+                .mapToInt(TourRating::getScore).average()
+                .orElseThrow(() ->
+                        new NoSuchElementException("Tour has no ratings")));
     }
 
     /**
