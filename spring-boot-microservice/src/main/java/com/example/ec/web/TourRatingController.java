@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -49,9 +50,46 @@ public class TourRatingController {
         return tourRatingRepository.save(tourRating);
     }
 
+    @PutMapping
+    public RatingDto updateWithPut(@PathVariable(value = "tourId") Integer tourId,
+                                   @RequestBody @Validated RatingDto dto) {
+        TourRating tourRating = verifyTourRating(tourId, dto.getCustomerId());
+        tourRating.setScore(dto.getScore());
+        tourRating.setComment(dto.getComment());
+        return new RatingDto(tourRatingRepository.save(tourRating));
+    }
+
+    @PatchMapping
+    public RatingDto updateWithPatch(@PathVariable(value = "tourId") Integer tourId,
+                                     @RequestBody @Validated RatingDto dto) {
+        TourRating tourRating = verifyTourRating(tourId, dto.getCustomerId());
+        if(dto.getScore() != null) {
+            tourRating.setScore(dto.getScore());
+        }
+        if(dto.getComment() != null) {
+            tourRating.setComment(dto.getComment());
+        }
+        return new RatingDto(tourRatingRepository.save(tourRating));
+    }
+
+    @DeleteMapping("/{customerId}")
+    public void delete(@PathVariable(value = "tourId") Integer tourId,
+                       @PathVariable(value = "customerId") Integer customerId) {
+        TourRating tourRating = verifyTourRating(tourId, customerId);
+
+        tourRatingRepository.delete(tourRating);
+    }
+
     private Tour verifyTour(Integer tourId) {
         return tourRepository.findById(tourId)
                 .orElseThrow(() -> new NoSuchElementException("Tour not find with id " + tourId));
+    }
+
+    private TourRating verifyTourRating(Integer tourId, Integer customerId) {
+        return tourRatingRepository.findByPkTourIdAndPkCustomerId(tourId, customerId)
+                .orElseThrow(() -> new NoSuchElementException(
+                        MessageFormat.format("No Tour Rating find with id {0} and customer {1}",
+                                tourId, customerId)));
     }
 
     @GetMapping
