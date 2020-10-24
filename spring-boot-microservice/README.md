@@ -139,3 +139,11 @@ To **delete** use:
 
     @DeleteMapping(path = "/{id}")
     public Example delete(@PathVariable(value = "id") int id)
+
+### 4.6 Paging and sorting DTOs
+Some query examples:
+
+    http://localhost:8080/tours/1/ratings?size=2&page=0&sort=score,desc
+    http://localhost:8080/tours/1/ratings?size=2&page=0&sort=comment,asc
+    http://localhost:8080/tours/1/ratings?size=2&page=2&sort=pk.customerId,asc
+    
