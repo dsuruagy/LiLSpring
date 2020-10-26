@@ -176,3 +176,9 @@ Some query examples:
 | @ManyToMany             | N/A                                                                            |
 | @OneToOne               | N/A                                                                            |
 | N/A                     | @DBRef - Refers to another Document within a Document                          |
+
+After changing our code, here are some URLs that could be used:
+
+    http://localhost:8080/tours
+    http://localhost:8080/tours/5f968df27a40797573c97ab8/ratings // id is a big String now
+    http://localhost:8080/tours/search/findSummaryByTourPackageCode?code=CC
