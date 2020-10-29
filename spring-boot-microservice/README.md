@@ -176,3 +176,16 @@ Some query examples:
 | @ManyToMany             | N/A                                                                            |
 | @OneToOne               | N/A                                                                            |
 | N/A                     | @DBRef - Refers to another Document within a Document                          |
+
+
+# Extending, Securing, and Dockerizing Spring Boot Microservices
+29/10/2020
+
+## Chapter 1 - Enhancing a Spring Boot Microservice
+
+### 1.1 Identify transactional business services boundaries
+
+The following POST fails because of the existence of one rating for the customerId 4, inserted by the data.sql script. To solve the problem, the TourRatingService.rateMany() method was annotated with @Transactional.
+
+    http://localhost:8080/tours/1/ratings/3?customers=1,2,3,4,5
+    
