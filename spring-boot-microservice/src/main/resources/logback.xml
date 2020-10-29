@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!-- This creates a file appender and console appender, each with their own layout -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="com.example.ec" level="DEBUG"/>
+</configuration>
