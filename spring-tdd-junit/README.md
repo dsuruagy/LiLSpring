@@ -27,6 +27,15 @@ MySQL Workbench:
 ## 2. Testing Spring Service Components
 ### 2.2 Write integration tests for @Service
 
+#### Setup Preview
+
+Instruct JUnit to do the following
+* **Not** load @controllers
+* **Only** load @service and dependencies
+* Examples: @datarepository and similar
+* Connect to a **real** data source - test-specific or other staging.
+
+
 - Execute the *ContactsManagementServiceIntegrationTest* class tests.
 - See the results on MySQL workbench:
 
