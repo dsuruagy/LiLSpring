@@ -41,3 +41,15 @@ Instruct JUnit to do the following
 
 
     SELECT id, first_name, last_name FROM `spring-tdd`.customer_contact;
+    
+### 2.3 Write unit tests for @Service
+
+#### Setup Preview
+
+Instruct JUnit to do the following
+* **Not** load @controllers
+* Load **mocks** for @service and its dependencies
+* Example: @data*
+* Use Mockito for our mocking framework
+* There is **no** data source to configure
+

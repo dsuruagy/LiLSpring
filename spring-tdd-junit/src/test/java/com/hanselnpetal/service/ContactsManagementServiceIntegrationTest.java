@@ -1,24 +1,35 @@
 package com.hanselnpetal.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
+import com.hanselnpetal.data.repos.CustomerContactRepository;
+import com.hanselnpetal.domain.CustomerContact;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit4.SpringRunner;
 
-import com.hanselnpetal.domain.CustomerContact;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 public class ContactsManagementServiceIntegrationTest {
-	
-	@Autowired
+
+	@Mock
+	private CustomerContactRepository customerContactRepository;
+
+	@InjectMocks
 	private ContactsManagementService contactsManagementService;
-	
+
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
 	
 	@Test
 	public void testAddContactHappyPath() {
@@ -28,13 +39,12 @@ public class ContactsManagementServiceIntegrationTest {
 		aContact.setFirstName("Jenny");
 		aContact.setLastName("Johnson");
 		
-		
+
+		when(customerContactRepository.save(any(CustomerContact.class))).thenReturn(aContact);
 		// Test adding the contact
-		CustomerContact newContact = contactsManagementService.add(aContact);
+		CustomerContact newContact = contactsManagementService.add(new CustomerContact());
 		
 		// Verify the addition
-		assertNotNull(newContact);
-		assertNotNull(newContact.getId());
 		assertEquals("Jenny", newContact.getFirstName());
 		
 	}
