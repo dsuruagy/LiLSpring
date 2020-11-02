@@ -53,3 +53,11 @@ Instruct JUnit to do the following
 * Use Mockito for our mocking framework
 * There is **no** data source to configure
 
+## 3.2 Write integration tests for @Controller
+#### Setup Preview
+
+Instruct JUnit to do the following
+* Provide full servlet engine behavior
+* Load @controllers
+* Load @service
+* Load @datarepository
