@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import com.hanselnpetal.data.repos.CustomerContactRepository;
 import com.hanselnpetal.domain.CustomerContact;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ContactsManagementService {
 
@@ -22,6 +25,14 @@ public class ContactsManagementService {
 		
 		return newContact;	
 	}
+
+    public List<CustomerContact> getContacts() {
+		List<CustomerContact> contacts = new ArrayList<>();
+
+		customerContactRepository.findAll().forEach(contact -> contacts.add(contact));
+
+		return contacts;
+    }
 	
 	/*
 	public CustomerContact addContactOccasion(CustomerContact aContact, ContactImportantOccasion anOccasion) {

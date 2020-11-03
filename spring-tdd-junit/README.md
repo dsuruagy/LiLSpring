@@ -61,3 +61,11 @@ Instruct JUnit to do the following
 * Load @controllers
 * Load @service
 * Load @datarepository
+
+## 3.3 Write unit tests for @Controller
+#### Setup Preview
+
+Instruct JUnit to do the following
+* Mimic (mock) web browser behavior
+* Load @controllers
+* Load mock(s) for @service and beyond

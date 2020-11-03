@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
-public class ContactsManagementServiceIntegrationTest {
+public class ContactsManagementServiceUnitTest {
 
 	@Mock
 	private CustomerContactRepository customerContactRepository;
