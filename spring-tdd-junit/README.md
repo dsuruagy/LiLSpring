@@ -69,3 +69,18 @@ Instruct JUnit to do the following
 * Mimic (mock) web browser behavior
 * Load @controllers
 * Load mock(s) for @service and beyond
+
+## 4.2 Write integration tests for @Repository
+#### Setup Preview
+
+Instruct JUnit to do the following
+* **Not** load @controllers, nor @services
+* Load @repository and related dependencies
+* Example: @entity
+* Load JPA testing configurations
+
+@DataJpaTest Magic Explained - it's a shorthand of a lot of annotations. Here are some of them:
+* @AutoConfigureDataJpa - Imports all configuration needed for JPA testing
+* @AutoConfigureTestDatabase(replace=Replace.NONE) - Use an embedded test database or specify another database - external or staging - for your test needes.
+* @AutoConfigureTestEntityManager - Allowed us to have direct access to the EntityManager
+* @Transactional - Allowed us to have rollback behavior after test executions
