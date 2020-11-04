@@ -84,3 +84,13 @@ Instruct JUnit to do the following
 * @AutoConfigureTestDatabase(replace=Replace.NONE) - Use an embedded test database or specify another database - external or staging - for your test needes.
 * @AutoConfigureTestEntityManager - Allowed us to have direct access to the EntityManager
 * @Transactional - Allowed us to have rollback behavior after test executions
+
+## 4.3 Create integration test datasets
+#### Setup Preview
+
+Instruct JUnit to do the following
+* **Not** load @controllers, nor @services
+* Load @repository and related dependecies
+* Example: @entity
+* Load JPA testing Configurations
+* Load DBUnit testing configuration and dataset, in XML
