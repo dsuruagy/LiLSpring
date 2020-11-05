@@ -2,6 +2,7 @@ package com.example.ec.web;
 
 import com.example.ec.domain.TourRating;
 import com.example.ec.service.TourRatingService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class TourRatingController {
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Create a tour rating")
     public void createTourRating(@PathVariable(value = "tourId") int tourId, @RequestBody @Validated RatingDto ratingDto) {
         LOGGER.info("POST /tours/{}/ratings", tourId);
         tourRatingService.createNew(tourId, ratingDto.getCustomerId(), ratingDto.getScore(), ratingDto.getComment());
@@ -60,6 +62,7 @@ public class TourRatingController {
      */
     @PostMapping("/{score}")
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(summary = "Give many tours same score")
     public void createManyTourRatings(@PathVariable(value = "tourId") int tourId,
                                       @PathVariable(value = "score") int score,
                                       @RequestParam("customers") Integer customers[]) {

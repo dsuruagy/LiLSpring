@@ -189,3 +189,7 @@ The following POST fails because of the existence of one rating for the customer
 
     http://localhost:8080/tours/1/ratings/3?customers=1,2,3,4,5
     
+## Chapter 2 - Hardening the Microservice
+### 2.4 Documenting APIs with Swagger
+
+    http://localhost:8080/swagger-ui.html
