@@ -198,3 +198,5 @@ The following POST fails because of the existence of one rating for the customer
 ### 2.1 Users and roles
 
 With the addition of UserRepository class, with REST API exposed, we could see the users that are inside the database by accessing http://localhost:8080/users .
+
+By adding spring-boot-stater-security dependency, we're automatically directed to a login screen, because spring-security assumes that all the API must be protected and the users will have sessions, et al. 
