@@ -70,17 +70,17 @@ TourService
     
  ### 3.3 Explore the /search resource
  Every entity created in Spring Data REST exposes the /search endpoint. 
- Accessing http://localhost:8080/tourPackages/search, the findByName method, implemented on previous steps should be used:
+ Accessing http://localhost:8090/tourPackages/search, the findByName method, implemented on previous steps should be used:
  
-    http://localhost:8080/tourPackages/search/findByName?name=Backpack%20Cal
+    http://localhost:8090/tourPackages/search/findByName?name=Backpack%20Cal
  
  To show it, we should implement a new method on TourRepository to return Tours based on TourPackage code.
  
  ### 3.4 Paging and Sorting
  To implement paging and sorting, it is possible to paginate between the results and use URLs like below. Note the pages metadata and navigation links at the end of the JSON:
  
-    http://localhost:8080/tours?size=3&page=0&sort=title
-    http://localhost:8080/tours/search/findByTourPackageCode?code=BC&page=1&size=3
+    http://localhost:8090/tours?size=3&page=0&sort=title
+    http://localhost:8090/tours/search/findByTourPackageCode?code=BC&page=1&size=3
     
 ### 3.5 Controlling API exposure
 It is possible to control API exposure, using the following annotations:
@@ -91,8 +91,10 @@ It is possible to control API exposure, using the following annotations:
 It can be accomplished on overridden methods from CrudRepository, for example. After that, when we try to use a method not exported, we should receive the status "405 Method Not Allowed".
 
 ### 3.6 HAL browser
-The API documentation can be viewed on the http://localhost:8080/profile, although it is very ugly. 
+The API documentation can be viewed on the http://localhost:8090/profile, although it is very ugly. 
 To provide better visualization, we could use the HAL browser. HAL comes from JSON Hypertext Application Language and is a simple format that gives a consistent and easy way to hyperlink between resources in our API.
+
+HAL browser is deprecated, so I update it to HAL explorer, as suggested on the startup log.
 
 ## Chapter 4 - Expose RESTful APIs with Spring MVC
 ### 4.1 Choosing the right framework
@@ -143,9 +145,9 @@ To **delete** use:
 ### 4.6 Paging and sorting DTOs
 Some query examples:
 
-    http://localhost:8080/tours/1/ratings?size=2&page=0&sort=score,desc
-    http://localhost:8080/tours/1/ratings?size=2&page=0&sort=comment,asc
-    http://localhost:8080/tours/1/ratings?size=2&page=2&sort=pk.customerId,asc
+    http://localhost:8090/tours/1/ratings?size=2&page=0&sort=score,desc
+    http://localhost:8090/tours/1/ratings?size=2&page=0&sort=comment,asc
+    http://localhost:8090/tours/1/ratings?size=2&page=2&sort=pk.customerId,asc
     
 ## Chapter 5 - Pivot to a MongoDB NoSQL Data Source
 ### 4.1 Introduction to MongoDB
@@ -187,16 +189,26 @@ Some query examples:
 
 The following POST fails because of the existence of one rating for the customerId 4, inserted by the data.sql script. To solve the problem, the TourRatingService.rateMany() method was annotated with @Transactional.
 
-    http://localhost:8080/tours/1/ratings/3?customers=1,2,3,4,5
+    http://localhost:8090/tours/1/ratings/3?customers=1,2,3,4,5
     
 ## Chapter 2 - Hardening the Microservice
 ### 2.4 Documenting APIs with Swagger
 
-    http://localhost:8080/swagger-ui.html
+    http://localhost:8090/swagger-ui.html
 
 ## Chapter 3 - Spring Security with JSON Web Tokens (JWT)
-### 2.1 Users and roles
+### 3.1 Users and roles
 
-With the addition of UserRepository class, with REST API exposed, we could see the users that are inside the database by accessing http://localhost:8080/users .
+With the addition of UserRepository class, with REST API exposed, we could see the users that are inside the database by accessing http://localhost:8090/users .
 
-By adding spring-boot-stater-security dependency, we're automatically directed to a login screen, because spring-security assumes that all the API must be protected and the users will have sessions, et al. 
+By adding spring-boot-stater-security dependency, we're automatically directed to a login screen, because spring-security assumes that all the API must be protected and the users will have sessions, et al.
+
+### 3.2 Spring Security authentication
+To test the authentication, do a Post with 
+
+    http://localhost:8090/users/signin
+
+and JSON
+
+    {"username": "admin",
+     "password": "letmein"}
