@@ -193,3 +193,8 @@ The following POST fails because of the existence of one rating for the customer
 ### 2.4 Documenting APIs with Swagger
 
     http://localhost:8080/swagger-ui.html
+
+## Chapter 3 - Spring Security with JSON Web Tokens (JWT)
+### 2.1 Users and roles
+
+With the addition of UserRepository class, with REST API exposed, we could see the users that are inside the database by accessing http://localhost:8080/users .
