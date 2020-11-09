@@ -212,3 +212,37 @@ and JSON
 
     {"username": "admin",
      "password": "letmein"}
+     
+### 3.4 Understanding JWT - JSON Web Token
+#### Spring Security/REST Quandary
+##### Spring Security
+* Principle and authorities kept on the session
+
+##### Restful API
+* Rest is stateless, no session. It means that we have to send the username and password to every restrict API request? No. There are other ways to use the concept of a session with stateless RESTful APIs.
+
+#### API Request Flow> JSON Web Token (JWT)
+* Request authentication ==> JWT
+* Subsequent requests, will add the token into the header: HTTP header JWT (OAuth is a frequently used implementation that follows this methodology)
+
+#### Header.Payload.Signature
+##### Header
+* type (json web token)
+* hashing algorithm (HMAC SHA256)
+
+##### Payload (also known as claims)
+* sub: Subject of the token
+* exp: the expiration in NumericDate value
+* iat: The time the JWT was issued. Can be used to determine the age of the JWT
+* jti: Unique identifier for the JWT. Can be used to prevent the JWT from being replayed
+* <app-specific-key>:<app-specific-value>
+
+##### Signature
+* Hash value of Header and Payload using a secret string embedded in the application
+
+### 3.5 Configuring Spring Security for JWT for authorization
+At the UserService.signin method, we are returning the authentication token, created on JWTProvider. To decode this token header, payload and signature, we could use the [jsonwebtoken.io website](https://www.jsonwebtoken.io/).
+
+This token should be used on future requests, as a header like this:
+
+    Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3YWxseSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn0seyJhdXRob3JpdHkiOiJST0xFX0NTUiJ9XSwiaWF0IjoxNjA0OTE0MzEwLCJleHAiOjE2MDQ5MTQ5MTB9.gFmi1bBhqw7h0YRD9cZzNIwn7oyiJ2pw1wwqsd4Q7eU
