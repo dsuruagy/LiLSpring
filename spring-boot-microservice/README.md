@@ -238,7 +238,7 @@ and JSON
 * <app-specific-key>:<app-specific-value>
 
 ##### Signature
-* Hash value of Header and Payload using a secret string embedded in the application
+* Hash value of Header and Payload using a secret string embedded in the applicationpo
 
 ### 3.5 Configuring Spring Security for JWT for authorization
 At the UserService.signin method, we are returning the authentication token, created on JWTProvider. To decode this token header, payload and signature, we could use the [jsonwebtoken.io website](https://www.jsonwebtoken.io/).
@@ -246,3 +246,25 @@ At the UserService.signin method, we are returning the authentication token, cre
 This token should be used on future requests, as a header like this:
 
     Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3YWxseSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn0seyJhdXRob3JpdHkiOiJST0xFX0NTUiJ9XSwiaWF0IjoxNjA0OTE0MzEwLCJleHAiOjE2MDQ5MTQ5MTB9.gFmi1bBhqw7h0YRD9cZzNIwn7oyiJ2pw1wwqsd4Q7eU
+
+## Chapter 4 - Leveraging Docker for MySQL Database Access
+
+### 4.2 Running the application with MySQL container
+
+##### Start MySql Container (downloads image if not found)
+``
+docker run  --detach   --name ec-mysql -p 6604:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=explorecali -e MYSQL_USER=cali_user -e MYSQL_PASSWORD=cali_pass -d mysql
+``
+
+##### Interact with Database (link to ec-mysql container) with mysql client
+``
+docker run -it --link ec-mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+``
+
+After starting the application twice, the row numbers on tour table duplicates. So the scripts is good for database initialization, but not for migration.
+
+Stop the docker mysql image to clear the database:
+
+    docker stop ec-mysql
+    docker rm ec-mysql
+    
