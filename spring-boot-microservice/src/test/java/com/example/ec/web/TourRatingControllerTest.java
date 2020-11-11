@@ -17,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -58,6 +60,9 @@ public class TourRatingControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @Autowired
+    private JwtRequestHelper jwtRequestHelper;
+
     @MockBean
     private TourRatingService serviceMock;
 
@@ -83,8 +88,10 @@ public class TourRatingControllerTest {
      */
     @Test
     public void createTourRating() throws Exception {
-        restTemplate
-                .postForEntity(TOUR_RATINGS_URL, ratingDto, Void.class);
+        restTemplate.exchange(TOUR_RATINGS_URL,
+                HttpMethod.POST,
+                new HttpEntity(ratingDto, jwtRequestHelper.withRole( "ROLE_CSR")),
+                Void.class);
 
         verify(this.serviceMock)
                 .createNew(TOUR_ID, CUSTOMER_ID, SCORE, COMMENT);
@@ -95,7 +102,10 @@ public class TourRatingControllerTest {
      */
     @Test
     public void delete() throws Exception {
-        restTemplate.delete(TOUR_RATINGS_URL + "/" + CUSTOMER_ID);
+        restTemplate.exchange(TOUR_RATINGS_URL + "/" + CUSTOMER_ID,
+                HttpMethod.DELETE,
+                new HttpEntity<>(jwtRequestHelper.withRole("ROLE_CSR")),
+                Void.class);
 
         verify(serviceMock).delete(TOUR_ID, CUSTOMER_ID);
     }
@@ -104,8 +114,10 @@ public class TourRatingControllerTest {
      */
     @Test
     public void createManyTourRatings() throws Exception {
-        restTemplate
-                .postForEntity(TOUR_RATINGS_URL + "/" + SCORE + "?customers=" + CUSTOMER_ID, ratingDto, Void.class);
+        restTemplate.exchange(TOUR_RATINGS_URL + "/" + SCORE + "?customers=" + CUSTOMER_ID,
+                HttpMethod.POST,
+                new HttpEntity(ratingDto, jwtRequestHelper.withRole( "ROLE_CSR")),
+                Void.class);
 
         verify(serviceMock)
                 .rateMany(TOUR_ID, SCORE, new Integer[] {CUSTOMER_ID});
