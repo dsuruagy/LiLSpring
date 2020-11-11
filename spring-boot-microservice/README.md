@@ -268,3 +268,6 @@ Stop the docker mysql image to clear the database:
     docker stop ec-mysql
     docker rm ec-mysql
     
+## 4.3 Database migration with Flyway
+
+A new table is created to identify the scripts versions that are already executed on the database.
