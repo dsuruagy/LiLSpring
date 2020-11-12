@@ -271,3 +271,18 @@ Stop the docker mysql image to clear the database:
 ## 4.3 Database migration with Flyway
 
 A new table is created to identify the scripts versions that are already executed on the database.
+
+## 4.4 Selecting Spring profiles at runtime
+
+It's a good idea to have more than one profile pointing to different databases. The profile can be changed on the application.properties file, or using a different command line to start, like this:
+
+ Note:The following suggested command didn't work for me: 
+    
+    mvn spring-boot:run -Dspring.profiles.active=mysql -DskipTests=true
+ 
+ I'm using maven profile to achieve the same result [Activating Spring Boot profile with Maven profile](http://dolszewski.com/spring/spring-boot-properties-per-maven-profile/):
+ 
+    # default profile:
+    mvn spring-boot:run -DskipTests=true
+    # mysql profile:
+    mvn spring-boot:run -Pmysql -DskipTests=true
