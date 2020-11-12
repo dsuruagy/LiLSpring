@@ -286,3 +286,25 @@ It's a good idea to have more than one profile pointing to different databases. 
     mvn spring-boot:run -DskipTests=true
     # mysql profile:
     mvn spring-boot:run -Pmysql -DskipTests=true
+    
+ ## 5.1 Create and run a Java application Docker image
+ 
+ First we make sure the package was generated:
+ 
+    mvn clean package
+    
+ After that, we modify the _Dockerfile_ as needed and execute the following commands to build and check if it is available:
+ 
+    docker build -t explorecali .
+    
+    docker images
+    
+ Run the image (in this case, I'm changing the localport to 8080, but internally the container is using the port defined in application.properties):
+ 
+    docker run --name ec-app -p8080:8090 -d explorecali
+    
+    docker ps -a
+    
+To test, I requested the following URL on Postman:
+ 
+    http://localhost:8080/tours
