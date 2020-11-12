@@ -308,3 +308,31 @@ It's a good idea to have more than one profile pointing to different databases. 
 To test, I requested the following URL on Postman:
  
     http://localhost:8080/tours
+    
+## 5.2 Link the Java application and database Docker containers
+Stop the container and remove the image created above:
+
+    docker stop ec-app
+    docker rmi explorecali -f
+    
+Build the application and container:
+
+    mvn clean package -Pmysql -DskipTests=true
+    docker build -t explorecali .
+    
+Remove previous running containers...
+
+    docker rm ec-mysql
+    docker rm ec-app
+
+...before run them again:
+    
+    docker run  --detach   --name ec-mysql -p 6604:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=explorecali -e MYSQL_USER=cali_user -e MYSQL_PASSWORD=cali_pass -d mysql
+    
+    docker run  --name ec-app -p 8080:8090  --link ec-mysql:mysql -d explorecali
+    
+Check the application log:
+
+    docker logs ec-app
+    
+    
