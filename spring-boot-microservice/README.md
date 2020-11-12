@@ -335,4 +335,18 @@ Check the application log:
 
     docker logs ec-app
     
+## 5.3 Separate application image from database migration
+The flyway scripts are bundled within the application. It is better to separate it. Stop and remove the image.
+
+    docker stop ec-app
+    docker rm ec-app
+    docker rmi explorecali
+
+Build the application with the new profile docker:
+
+    mvn clean package -Pdocker -DskipTests=true
+    docker build -t explorecali .
+
+Run the image, passing the parameters. The flyway scripts were copied to my local folder (C:\Users\dsuru\dev\tmp\db\migration) before running this command: 
     
+    docker run --name ec-app -p 8080:8090 -v C://Users//dsuru//dev//tmp//db//migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali
