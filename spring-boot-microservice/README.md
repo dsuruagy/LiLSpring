@@ -370,3 +370,14 @@ Run these images:
     docker run --name ec-app-default -p 8080:8090  -d explorecali-default
     docker run --name ec-app-mysql -p 8181:8090  --link ec-mysql:mysql -d explorecali-mysql
     docker run --name ec-app-docker -p 8282:8090 -v ~/db/migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali-docker
+    
+## 5.5 Sharing images with Docker hub
+Push a docker image to the repository:
+
+    docker login
+    docker tag da3d1cc9e443 dsuruagy/explorecali-default:latest
+    docker push dsuruagy/explorecali-default
+
+After removing all the docker images, let's try to run from the repository image:
+
+    docker run --name ec-app-default -p 8080:8090 -d dsuruagy/explorecali-default
