@@ -8,3 +8,7 @@
 * Create SRC and resource folders
 * Add static resources (CSS, images, JSP)
 * Add the Java configuration to bootstrap _DispatcherServlet_ class
+
+Run application:
+
+    mvn clean package tomcat7:run-war
