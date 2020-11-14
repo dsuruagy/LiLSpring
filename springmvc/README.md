@@ -15,3 +15,6 @@ Run application:
 
 ### 1.8 Generate Spring MVC project with Spring Boot
 * Generate a Maven project with Spring Initializr
+* Add dependencies to run project with JSPs
+* Add JSPs to webapp folder
+* Add static resources (CSS, images)
