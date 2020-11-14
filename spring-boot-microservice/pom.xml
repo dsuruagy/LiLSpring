@@ -50,6 +50,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-rest-hal-explorer</artifactId>
 		</dependency>
@@ -86,7 +94,52 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>1.2.2</version>
+				<configuration>
+					<imageName>explorecali-${spring.profiles.active}</imageName>
+					<baseImage>openjdk:11</baseImage>
+					<entryPoint>[ "java", "-jar", "/explorecal-0.0.1-SNAPSHOT.jar"]</entryPoint>
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+					<forceTags>true</forceTags>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>default</spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
+            <id>mysql</id>
+			<properties>
+				<spring.profiles.active>mysql</spring.profiles.active>
+			</properties>
+        </profile>
+		<profile>
+			<id>docker</id>
+			<properties>
+				<spring.profiles.active>docker</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 </project>

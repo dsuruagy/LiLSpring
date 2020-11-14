@@ -238,7 +238,7 @@ and JSON
 * <app-specific-key>:<app-specific-value>
 
 ##### Signature
-* Hash value of Header and Payload using a secret string embedded in the application
+* Hash value of Header and Payload using a secret string embedded in the applicationpo
 
 ### 3.5 Configuring Spring Security for JWT for authorization
 At the UserService.signin method, we are returning the authentication token, created on JWTProvider. To decode this token header, payload and signature, we could use the [jsonwebtoken.io website](https://www.jsonwebtoken.io/).
@@ -246,3 +246,138 @@ At the UserService.signin method, we are returning the authentication token, cre
 This token should be used on future requests, as a header like this:
 
     Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3YWxseSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn0seyJhdXRob3JpdHkiOiJST0xFX0NTUiJ9XSwiaWF0IjoxNjA0OTE0MzEwLCJleHAiOjE2MDQ5MTQ5MTB9.gFmi1bBhqw7h0YRD9cZzNIwn7oyiJ2pw1wwqsd4Q7eU
+
+## Chapter 4 - Leveraging Docker for MySQL Database Access
+
+### 4.2 Running the application with MySQL container
+
+##### Start MySql Container (downloads image if not found)
+``
+docker run  --detach   --name ec-mysql -p 6604:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=explorecali -e MYSQL_USER=cali_user -e MYSQL_PASSWORD=cali_pass -d mysql
+``
+
+##### Interact with Database (link to ec-mysql container) with mysql client
+``
+docker run -it --link ec-mysql:mysql --rm mysql sh -c 'exec mysql -h"$MYSQL_PORT_3306_TCP_ADDR" -P"$MYSQL_PORT_3306_TCP_PORT" -uroot -p"$MYSQL_ENV_MYSQL_ROOT_PASSWORD"'
+``
+
+After starting the application twice, the row numbers on tour table duplicates. So the scripts is good for database initialization, but not for migration.
+
+Stop the docker mysql image to clear the database:
+
+    docker stop ec-mysql
+    docker rm ec-mysql
+    
+## 4.3 Database migration with Flyway
+
+A new table is created to identify the scripts versions that are already executed on the database.
+
+## 4.4 Selecting Spring profiles at runtime
+
+It's a good idea to have more than one profile pointing to different databases. The profile can be changed on the application.properties file, or using a different command line to start, like this:
+
+ Note:The following suggested command didn't work for me: 
+    
+    mvn spring-boot:run -Dspring.profiles.active=mysql -DskipTests=true
+ 
+ I'm using maven profile to achieve the same result [Activating Spring Boot profile with Maven profile](http://dolszewski.com/spring/spring-boot-properties-per-maven-profile/):
+ 
+    # default profile:
+    mvn spring-boot:run -DskipTests=true
+    # mysql profile:
+    mvn spring-boot:run -Pmysql -DskipTests=true
+    
+ ## 5.1 Create and run a Java application Docker image
+ 
+ First we make sure the package was generated:
+ 
+    mvn clean package
+    
+ After that, we modify the _Dockerfile_ as needed and execute the following commands to build and check if it is available:
+ 
+    docker build -t explorecali .
+    
+    docker images
+    
+ Run the image (in this case, I'm changing the localport to 8080, but internally the container is using the port defined in application.properties):
+ 
+    docker run --name ec-app -p8080:8090 -d explorecali
+    
+    docker ps -a
+    
+To test, I requested the following URL on Postman:
+ 
+    http://localhost:8080/tours
+    
+## 5.2 Link the Java application and database Docker containers
+Stop the container and remove the image created above:
+
+    docker stop ec-app
+    docker rmi explorecali -f
+    
+Build the application and container:
+
+    mvn clean package -Pmysql -DskipTests=true
+    docker build -t explorecali .
+    
+Remove previous running containers...
+
+    docker rm ec-mysql
+    docker rm ec-app
+
+...before run them again:
+    
+    docker run  --detach   --name ec-mysql -p 6604:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=explorecali -e MYSQL_USER=cali_user -e MYSQL_PASSWORD=cali_pass -d mysql
+    
+    docker run  --name ec-app -p 8080:8090  --link ec-mysql:mysql -d explorecali
+    
+Check the application log:
+
+    docker logs ec-app
+    
+## 5.3 Separate application image from database migration
+The flyway scripts are bundled within the application. It is better to separate it. Stop and remove the image.
+
+    docker stop ec-app
+    docker rm ec-app
+    docker rmi explorecali
+
+Build the application with the new profile docker:
+
+    mvn clean package -Pdocker -DskipTests=true
+    docker build -t explorecali .
+
+Run the image, passing the parameters. The flyway scripts were copied to my local folder (C:\Users\dsuru\dev\tmp\db\migration) before running this command: 
+    
+    docker run --name ec-app -p 8080:8090 -v C://Users//dsuru//dev//tmp//db//migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali
+    
+## 5.4 Leverage a Docker Maven plugin
+There are plugins to automate the image generation.
+
+**Note**: On Windows, check the box 'Expose daemon on tcp://localhost:2375 without TLS', under Docker's General Settings.
+
+With the Spotify plugin, the Dockerfile is not necessary anymore. We can build our images from the build:
+
+    # default:
+    mvn package -DskipTests=true docker:build
+    # mysql:
+    mvn package -Pmysql -DskipTests=true docker:build
+    # docker:
+    mvn package -Pdocker -DskipTests=true docker:build
+
+Run these images:
+
+    docker run --name ec-app-default -p 8080:8090  -d explorecali-default
+    docker run --name ec-app-mysql -p 8181:8090  --link ec-mysql:mysql -d explorecali-mysql
+    docker run --name ec-app-docker -p 8282:8090 -v ~/db/migration:/var/migration -e server=ec-mysql -e port=3306 -e dbuser=cali_user -e dbpassword=cali_pass --link ec-mysql:mysql -d explorecali-docker
+    
+## 5.5 Sharing images with Docker hub
+Push a docker image to the repository:
+
+    docker login
+    docker tag da3d1cc9e443 dsuruagy/explorecali-default:latest
+    docker push dsuruagy/explorecali-default
+
+After removing all the docker images, let's try to run from the repository image:
+
+    docker run --name ec-app-default -p 8080:8090 -d dsuruagy/explorecali-default
