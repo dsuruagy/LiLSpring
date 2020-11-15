@@ -18,3 +18,7 @@ Run application:
 * Add dependencies to run project with JSPs
 * Add JSPs to webapp folder
 * Add static resources (CSS, images)
+* Map static resoruces in the context configuration class
+* Add view resolver in context configuration for JSPs
+* Add database configuration in .properties file
+* Add _HomeController_ to go to home page
