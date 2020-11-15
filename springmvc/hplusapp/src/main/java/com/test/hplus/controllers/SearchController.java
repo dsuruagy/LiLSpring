@@ -6,18 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class SearchController {
     private Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
 
-    @GetMapping("/home")
-    public String goHome() {
-        LOGGER.debug("in home controller");
-        return "index";
-    }
-
-    @GetMapping("/goToSearch")
-    public String goToSearch() {
-        LOGGER.debug("going to search page");
+    @GetMapping("/search")
+    public String search() {
+        LOGGER.debug("in search controller");
         return "search";
     }
 }

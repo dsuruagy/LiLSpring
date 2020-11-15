@@ -22,3 +22,18 @@ Run application:
 * Add view resolver in context configuration for JSPs
 * Add database configuration in .properties file
 * Add _HomeController_ to go to home page
+
+## Chapter 2: Implementing Controller Flows
+### 2.1 Basic annotations for controllers
+**Controllers in Spring MVC**
+* Annotated with @Controller
+* Controller specific annotations/objects:
+    * @RequestParam - used in methods to receive request params
+    * Model/ModelMap - Interface/Implementation that allow us to receive data from the view as key and value pairs. Used as method parameter.
+    * ModelAndView - Can hold the name of the view and the data to display on the JSP in one single type.
+    * @ModelAttribute - used to annotate parameters for data binding.
+    
+**Search Use Case Demo**
+* Create a SearchController and provide a GetMapping for it
+* Insert the search.jsp and add the URL of SearchController to the action of the JSP
+* Inside index.jsp, insert the link to the search page 
