@@ -37,3 +37,8 @@ Run application:
 * Create a SearchController and provide a GetMapping for it
 * Insert the search.jsp and add the URL of SearchController to the action of the JSP
 * Inside index.jsp, insert the link to the search page 
+
+**@RequestParam and Database code**
+* Add @RequestParam and Model parameters on the method
+* Map the same request parameter on the form in the search.jsp
+* Add Product.java bean

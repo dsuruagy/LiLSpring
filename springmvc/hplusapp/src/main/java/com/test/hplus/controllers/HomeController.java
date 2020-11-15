@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    private Logger LOGGER = LoggerFactory.getLogger(SearchController.class);
+    private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/home")
     public String goHome() {
