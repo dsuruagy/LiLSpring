@@ -42,3 +42,8 @@ Run application:
 * Add @RequestParam and Model parameters on the method
 * Map the same request parameter on the form in the search.jsp
 * Add Product.java bean
+
+**Access Data from Modelos on JSP**
+* Add a _ProductRepository.java_ for database access and a custom method to search results based on the search text
+* Modify _SearchController_ to call repository and set it in Model
+* Add code to access models in JSP
