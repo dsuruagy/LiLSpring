@@ -47,3 +47,14 @@ Run application:
 * Add a _ProductRepository.java_ for database access and a custom method to search results based on the search text
 * Modify _SearchController_ to call repository and set it in Model
 * Add code to access models in JSP
+
+**Add @ModelAttribute**
+* Hplus home -> click on login link -> click on register user link -> Register User
+* Add _login.jsp_ and _register.jsp_ to the project
+* Add a route in _HomeController_ to go to _login.jsp_ and _register.jsp_ and map them to respective pages.
+* create _RegistrationController and add mapping for registering user
+
+**Add Model Attributes in JSP**
+* Add a _User.java_ bean to the project
+* Add @ModelAttribute to the method signature in _RegistrationController_ and to _register.jsp_
+* Add @ModelAttribute in _HomeController_ for default values on _register.jsp_ for new user and genderItems dropdown
