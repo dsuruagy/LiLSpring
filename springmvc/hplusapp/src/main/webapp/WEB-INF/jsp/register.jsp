@@ -42,15 +42,17 @@
 	 <div class="container tagline">
 	 <em>Register User</em><br/>
     		 <form:form method="post" action="/registeruser" modelAttribute="newuser">
-    			<label>Username</label> <form:input path="username" type="text" /><br/>
-    			<label>Password</label> <form:input path="password" type="password" /><br/>
-    			<label>First Name</label> <form:input path="firstName" type="text" /><br/>
+    			<label>Username</label> <form:input path="username" type="text" /><form:errors path="username" cssClass="error"/><br/>
+    			<label>Password</label> <form:input path="password" type="password" /><form:errors path="password" cssClass="error"/><br/>
+    			<label>First Name</label> <form:input path="firstName" type="text" /><form:errors path="firstName" cssClass="error"/><br/>
     			<label>Last Name</label> <form:input path="lastName" type="text" /><br/>
     			<label>What do you want to do? </label> 
 				<form:radiobutton path="activity" id="activity" value="Playing a sport"/>Play a Sport?
-				<form:radiobutton path="activity" id="activity" value="Exercise in Gym"/>Hit the Gym?<br/>
+				<form:radiobutton path="activity" id="activity" value="Exercise in Gym"/>Hit the Gym?
+				<form:errors path="activity" cssClass="error"/><br/>
     			<label>Date of birth</label>
-    			<form:input path="dateOfBirth" type="date" /><br/>
+    			<form:input path="dateOfBirth" type="date" />
+    			<form:errors path="dateOfBirth" cssClass="error"/><br/>
     			<label>Gender</label>
     			<form:select path="gender" items="${genderItems}"/>
     			<br/>

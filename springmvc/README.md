@@ -71,3 +71,5 @@ Run application:
 * Insert JSR-380 validation annotations in _User.java_ bean
 * Enable Controller with @Valid
 * Attach _BindingResult_ parameter to method - In the case of validation fail, the errors are populated inside this special object.
+* Plug in Spring's form tag on JSP to display error messages
+* Localize error messages for validations from .properties file

@@ -2,6 +2,7 @@ package com.test.hplus.beans;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -10,16 +11,17 @@ import javax.validation.constraints.Size;
 public class User {
     @Id
     private int id;
-    @Size(min=6, message = "Username cannot be less than 6 characters")
+    @Size(min=6, message = "{username.size}")
     private String username;
-    @Pattern(regexp = "((?=.*[A-Z]).{6,10})", message = "Password must have one upper case, one lower case and should be between 6 and 10 characters")
+    @Pattern(regexp = "((?=.*[A-Z]).{6,10})", message = "{password.pattern}")
     private String password;
     private String gender;
-    @NotNull(message = "Activity cannot be left empty")
+    @NotNull(message = "{activity.notnull}")
     private String activity;
-    @NotNull(message = "First name cannot be empty")
+    @NotEmpty(message = "{firstname.notempty}")
     private String firstName;
     private String lastName;
+    @NotEmpty(message = "{dateofbirth.notempty}")
     private String dateOfBirth;
 
     public int getId() {
