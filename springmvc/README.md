@@ -65,3 +65,9 @@ Run application:
 * Add action mapping to _register.jsp_
 * Add _UserRepository_ class
 * Modify the _RegistrationController_ to autowire _UserRepository_ and invoke insert method
+
+## Chapter 3: Data validation and binding
+**JSR Validations Demo**
+* Insert JSR-380 validation annotations in _User.java_ bean
+* Enable Controller with @Valid
+* Attach _BindingResult_ parameter to method - In the case of validation fail, the errors are populated inside this special object.
