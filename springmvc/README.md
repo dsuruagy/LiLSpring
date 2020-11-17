@@ -58,3 +58,10 @@ Run application:
 * Add a _User.java_ bean to the project
 * Add @ModelAttribute to the method signature in _RegistrationController_ and to _register.jsp_
 * Add @ModelAttribute in _HomeController_ for default values on _register.jsp_ for new user and genderItems dropdown
+
+**Add Database code**
+* Add Spring's form tag library to the project
+* Convert HTML form elements to Spring form tags
+* Add action mapping to _register.jsp_
+* Add _UserRepository_ class
+* Modify the _RegistrationController_ to autowire _UserRepository_ and invoke insert method
