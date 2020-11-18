@@ -73,3 +73,14 @@ Run application:
 * Attach _BindingResult_ parameter to method - In the case of validation fail, the errors are populated inside this special object.
 * Plug in Spring's form tag on JSP to display error messages
 * Localize error messages for validations from .properties file
+
+**Binders**
+* @ModelAttribute annotation works with String data types. For example, dateOfBirth is using String data type. If we want to user the Date data type, we must use Binders.
+* Binders
+    * Extract and bind request data fo Java model objects
+    * Required for complex data types defined in models
+    * PropertyEditor instances enabled via @Initbinder
+    * Custom editors can be implemented too
+
+*Binders Demo*
+* Change the data type from String to date
