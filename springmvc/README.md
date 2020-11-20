@@ -95,3 +95,30 @@ Run application:
 * Define a custom converter class which implements Converter interface
 * Add conversion logic
 * Register the converter in the configuration
+
+
+## Chapter 4 - Exception Handling
+### DispatcherServlet and special bean types
+ * _HandlerMapping_ - used to map the incoming request to a specific handler, which is a controller. It may also include pre- and post-processing components like filters (called interceptors in Spring MVC)
+ *  _HandlerAdapter_ - helps the DispatcherServlet to invoke the handler, even if it is invoked with XML or annotations. These details are hidden from _DispatcherServlet_.
+ * _HandlerExceptionResolver_ - helps with exception handling
+ * _ViewResolver_ - helps resolve views
+ * _LocaleResolver_ - helps for localization and internationalization
+ * _ThemeResolver_ - helps with stylized look and feel
+ 
+ ### Exception Handling in Spring MVC
+ * Handled by _DispatcherServlet_
+ * Delegates to _HandlerExceptionResolver_ beans
+ 
+ ### Implementations for Exception Handling
+ * _ExceptionHandlerExceptionResolver_ - define exception handler methods in controllers. Methods should be dedicated to this and annotaded with _@ExceptionHandler_
+ * _SimpleMappingExceptionResolver_ - map each exception class with an error page. Registered inside the context configuration file and offers API to map one exception to a particular error page.
+ * _DefaultHandlerExceptionResolver_ - default which maps exceptions to error codes. 
+ * _ResponseStatusExceptionResolver_ - resolves custom exceptions using status code define in _@ResponseStatus_
+ 
+ ### Exception Handling Demo in Hplus
+ * Login flow work: Hplus home -> Login (find users in the database table)
+ * Add "error.jsp" in the JSP folder for /error mapping
+ * Disable the default whitelabel error page
+ * Create _LoginController.java_ for login, map it to login.jsp
+ 
