@@ -1,6 +1,8 @@
 package com.test.hplus.beans;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,7 +18,8 @@ public class User {
     private String username;
     @Pattern(regexp = "((?=.*[A-Z]).{6,10})", message = "{password.pattern}")
     private String password;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @NotNull(message = "{activity.notnull}")
     private String activity;
     @NotEmpty(message = "{firstname.notempty}")
@@ -49,11 +52,11 @@ public class User {
         this.password = password;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

@@ -84,3 +84,14 @@ Run application:
 
 *Binders Demo*
 * Change the data type from String to date
+
+**Converters**
+* Transform request data to desired types
+* Built in convertors present
+* Custom convertors can be plugged in to define specific behavior
+
+*Converters demo*
+* Define an enum for gender
+* Define a custom converter class which implements Converter interface
+* Add conversion logic
+* Register the converter in the configuration
