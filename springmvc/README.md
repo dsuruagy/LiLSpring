@@ -121,4 +121,9 @@ Run application:
  * Add "error.jsp" in the JSP folder for /error mapping
  * Disable the default whitelabel error page
  * Create _LoginController.java_ for login, map it to login.jsp
- 
+ * Add _@ModelAttribute_ for method argument and the login.jsp
+ * Add _@ModelAttribute_ for default login values
+ * Add database code for selecting user from DB and autowire to controller
+ * Add Spring tags for login page
+ * Add a custom exception class in hplus for runtime exceptions
+ * User _@ExceptionHandler_ for a method in _LoginController.java_ and simulate exception

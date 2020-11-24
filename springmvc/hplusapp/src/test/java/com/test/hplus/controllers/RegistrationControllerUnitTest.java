@@ -10,8 +10,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -20,26 +18,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.validation.BindingResult;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = RegistrationController.class)
 @ContextConfiguration(classes = ApplicationConfig.class)
 public class RegistrationControllerUnitTest {
-    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
     public static final String USERNAME = "validtestuser";
     public static final String PASSWORD = "aA111111";
     public static final String FIRST_NAME = "Valid Test";
@@ -91,16 +85,10 @@ public class RegistrationControllerUnitTest {
         MvcResult mvcResult = perform
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(model().hasNoErrors())
                 .andReturn();
 
-        BindingResult bindingResult = (BindingResult) mvcResult
-                .getModelAndView().getModel().values().stream()
-                .filter(res -> res instanceof BindingResult)
-                .findFirst().orElse(null);
-
         verify(userRepository).save(any(User.class));
-        assertNotNull(bindingResult);
-        assertFalse(bindingResult.hasErrors());
     }
 
 }

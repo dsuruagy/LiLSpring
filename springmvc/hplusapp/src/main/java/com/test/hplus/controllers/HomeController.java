@@ -1,5 +1,6 @@
 package com.test.hplus.controllers;
 
+import com.test.hplus.beans.Login;
 import com.test.hplus.beans.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,5 +47,10 @@ public class HomeController {
     @ModelAttribute("genderItems")
     public List<String> getGenderItems() {
         return Arrays.asList("Male", "Female", "Other");
+    }
+
+    @ModelAttribute("login")
+    public Login getDefaultLogin() {
+        return new Login();
     }
 }
