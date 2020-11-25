@@ -127,3 +127,8 @@ Run application:
  * Add Spring tags for login page
  * Add a custom exception class in hplus for runtime exceptions
  * User _@ExceptionHandler_ for a method in _LoginController.java_ and simulate exception
+ 
+ ### Global Exception Handling Demo
+ * Add a class for exception handler
+ * Use _@ControllerAdvice_ on the class level
+ 
