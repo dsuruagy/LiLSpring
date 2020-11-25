@@ -44,6 +44,7 @@ public class LoginControllerIntegrationTest {
         mockMvc.perform(post("/login")
                 .param("username", USERNAME)
                 .param("password", "wrongpassword"))
+                .andExpect(status().isUnauthorized())
                 .andExpect(forwardedUrlPattern("/**/error.jsp"));
     }
 
@@ -53,6 +54,7 @@ public class LoginControllerIntegrationTest {
         mockMvc.perform(post("/login")
                 .param("username", "invalid")
                 .param("password", "admin"))
+                .andExpect(status().isUnauthorized())
                 .andExpect(forwardedUrlPattern("/**/error.jsp"));
     }
 }
