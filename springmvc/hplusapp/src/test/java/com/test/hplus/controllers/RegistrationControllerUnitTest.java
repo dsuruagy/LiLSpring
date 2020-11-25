@@ -23,10 +23,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -83,12 +81,35 @@ public class RegistrationControllerUnitTest {
         );
 
         MvcResult mvcResult = perform
-                .andDo(print())
+//                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(model().hasNoErrors())
+                .andExpect(model().attributeExists("userRegisteredMsg"))
                 .andReturn();
 
         verify(userRepository).save(any(User.class));
+    }
+
+    @Test
+    public void userRegistrationValidationErrors() throws Exception {
+
+        // https://stackoverflow.com/questions/27483064/modelattribute-controller-spring-mvc-mocking
+        ResultActions perform = mockMvc.perform(post("/registeruser")
+                .param("username", USERNAME)
+                .param("password", PASSWORD)
+        );
+
+        MvcResult mvcResult = perform
+//                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeExists("newuser"))
+                .andExpect(model().attributeExists("genderItems"))
+                .andExpect(model().attributeDoesNotExist("userRegisteredMsg"))
+                .andReturn();
+
+        verifyZeroInteractions(userRepository);
+
     }
 
 }

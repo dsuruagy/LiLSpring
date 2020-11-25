@@ -38,19 +38,4 @@ public class HomeController {
         LOGGER.debug("going to register page");
         return "register";
     }
-
-    @ModelAttribute("newuser")
-    public User getDefaultUser() {
-        return new User();
-    }
-
-    @ModelAttribute("genderItems")
-    public List<String> getGenderItems() {
-        return Arrays.asList("Male", "Female", "Other");
-    }
-
-    @ModelAttribute("login")
-    public Login getDefaultLogin() {
-        return new Login();
-    }
 }
