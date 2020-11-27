@@ -132,3 +132,23 @@ Run application:
  * Add a class for exception handler
  * Use _@ControllerAdvice_ on the class level
  
+ ## Chapter 5 - Async request processing
+ ### Conventional HTTP request processing
+ Threads are created by the controller for each request, and stuck up until the business logic finish to process. It is not a feasible thing to do
+
+![image 1](./Async1.PNG?raw=true "Conventional HTTP request processing")
+
+### Async processing at work
+* Integrated with Servlet 3.0 specification
+* Separate threads for request allocation and blocking calls
+* Enable the async processing for Spring MVC
+* Let controllers return either of the following
+    * _Callable\<T>_
+    * _DeferredResult\<T>_
+    
+![image 2](./Async2.PNG?raw=true "Async processing at work")
+
+### Async processing demo
+* Set async processing flag on Dispatcher Servlet
+* Add async processing configuration in WebConfig if needed
+* Return a _Callable\<String>/DeferredResult\<String>_ from Controllers

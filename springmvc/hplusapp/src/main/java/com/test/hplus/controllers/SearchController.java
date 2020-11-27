@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 @Controller
 public class SearchController {
@@ -20,14 +22,20 @@ public class SearchController {
     private ProductRepository productRepository;
 
     @GetMapping("/searchProduct")
-    public String search(@RequestParam("searchParam") String searchParam,
-                         Model model) {
+    public Callable<String> search(@RequestParam("searchParam") String searchParam,
+                                   Model model, HttpServletRequest request) {
         LOGGER.debug("in search controller");
         LOGGER.debug("searchParam: {}", searchParam);
+        LOGGER.debug("Async supported: " + request.isAsyncSupported());
+        LOGGER.debug("Name of servlet request thread: " + Thread.currentThread().getName());
 
-        List<Product> products = productRepository.searchByName(searchParam);
-        model.addAttribute("products", products);
-
-        return "search";
+        return () ->
+        {
+            Thread.sleep(3000);
+            LOGGER.debug("Name of servlet request thread: " + Thread.currentThread().getName());
+            List<Product> products = productRepository.searchByName(searchParam);
+            model.addAttribute("products", products);
+            return "search";
+        };
     }
 }
