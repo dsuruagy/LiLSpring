@@ -7,9 +7,12 @@ import com.test.hplus.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class LoginController {
@@ -27,5 +30,12 @@ public class LoginController {
         } else {
             throw new ApplicationException("User/Password not found");
         }
+    }
+
+    @ExceptionHandler(ApplicationException.class)
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public String ExceptionHandler() {
+        LOGGER.debug("in Login Controller exception handler");
+        return "error";
     }
 }
