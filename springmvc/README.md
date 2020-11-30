@@ -165,8 +165,13 @@ Run application:
         * _XmlViewResolver_ - XML registration of views in form of beans, like other configuration in Spring  
         * _VelocityViewResolver/FreeMarkerViewResolver_
         
-## XmlViewResolver Demo
+### XmlViewResolver Demo
 * Configure the _XmlViewResolver_ in application configuration
 
-## ResourceBundleViewResolver Demo
+### ResourceBundleViewResolver Demo
 * Configure the _ResourceBundleViewResolver_ in application configuration
+
+### Chaining of View Resolvers
+* Application can configure multiple view resolvers
+* Set order on each of them using setOrder API
+* Higher the order value, the later that view resolver is placed in the chain

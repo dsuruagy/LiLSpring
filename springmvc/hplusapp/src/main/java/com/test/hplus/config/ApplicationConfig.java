@@ -35,28 +35,30 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/static/css/", "classpath:/static/images/");
     }
 
-    /*@Bean
+    @Bean
     public InternalResourceViewResolver jspViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/jsp/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setViewClass(JstlView.class);
+        viewResolver.setOrder(2); // Second in the chain
         return viewResolver;
-    }*/
+    }
 
-   /* @Bean
+    @Bean
     public XmlViewResolver xmlViewResolver() {
         XmlViewResolver viewResolver = new XmlViewResolver();
         viewResolver.setLocation(new ClassPathResource("views.xml"));
+        viewResolver.setOrder(1); // First in the chain
         return viewResolver;
-    }*/
+    }
 
-    @Bean
+/*    @Bean
     public ResourceBundleViewResolver resourceBundleViewResolver() {
         ResourceBundleViewResolver resourceBundleViewResolver = new ResourceBundleViewResolver();
         resourceBundleViewResolver.setBasename("views");
         return resourceBundleViewResolver;
-    }
+    }*/
 
     @Override
     protected void addFormatters(FormatterRegistry registry) {
