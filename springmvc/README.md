@@ -152,3 +152,18 @@ Run application:
 * Set async processing flag on Dispatcher Servlet
 * Add async processing configuration in WebConfig if needed
 * Return a _Callable\<String>/DeferredResult\<String>_ from Controllers
+
+## Chapter 6 - View Resolvers
+### View Resolvers in Spring MVC
+* Resolving views, rendering content, displaying data, all of this is an integral part of any web MVC framework
+* Spring provides flexibility with view technologies
+* Works with two interfaces
+    * _View_ - the actual view, the content that you render in the browser, and the data that you display on it. One view can have information collected and displayed across multiple model attributes.
+    * _ViewResolver_ - responsible for actually resolving the views by name, and the view state will never change during the running of the application. Implementations are free to cache views so that they can be loaded faster the nest time they are rendered in the browser.
+        * _InternalResourceViewResolver_ 
+        * _ResourceBundleViewResolver_ - .properties file used to define names and map to JSPs
+        * _XmlViewResolver_ - XML registration of views in form of beans, like other configuration in Spring  
+        * _VelocityViewResolver/FreeMarkerViewResolver_
+        
+## XmlViewResolver Demo
+* Configure the _XmlViewResolver_ in application configuration
