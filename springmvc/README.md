@@ -167,3 +167,6 @@ Run application:
         
 ## XmlViewResolver Demo
 * Configure the _XmlViewResolver_ in application configuration
+
+## ResourceBundleViewResolver Demo
+* Configure the _ResourceBundleViewResolver_ in application configuration
