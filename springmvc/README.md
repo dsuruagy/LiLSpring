@@ -2,6 +2,21 @@
 13/11/2020
 
 ## Chapter 1: Getting started and project setup
+### 1.3 Spring MVC Architecture
+
+![Spring MVC Architecture](./Architecture.PNG?raw=true "Spring MVC Architecture")
+
+1. Let's say this is your client, a JSP. It could be any other view technology that you want to work with. 
+2. When you have an incoming request from your client it is intercepted by an API called Dispatcher Servlet, and this is the start of the Spring MVC framework. Every request is always uniquely identified by a urlpattern. And this urlpattern is mapped to a filter and a controller dedicated to that request processing. 
+3. This URLmapping resolution will be done by Dispatcher Servlet by means of interacting with another special bean type called Handler Mapping. 
+4. Once it does this resolution, then it'll delegate the control to the respective controller component. Dispatcher Servlet works on a design pattern called Front Controller. This pattern is common even across the other web MVC frameworks. 
+5. All the incoming requests that come in the application are first intercepted by it and bases who wants to go where it'll delegate the control to the respective controller. 
+6. The controller is then free to call the rest of the Application Business Logic where it may talk to database or any other third-party service. 
+7. Once the logic execution is completed, the flow comes back to the controller. And that's the point where the controller decides the name of the view that the control is supposed to be for, what it do for the display of data. 
+8. This logical name is picked up by the Dispatcher Servlet and it consults another component called View resolvers. View resolvers will help Dispatcher Servlet know the mapping of the logical name of the view to the respective JSP template. 
+9. Thereafter the Dispatcher Servlet is then going to carry the JSP and display it in the browser as part of the response.
+
+
 ### 1.4 Create MVC Project with Maven
 * Create a Maven web app archetype project
 * Put in all dependencies for Spring MVC (dependencies attached in the resources folders in exercise files)
@@ -175,3 +190,30 @@ Run application:
 * Application can configure multiple view resolvers
 * Set order on each of them using setOrder API
 * Higher the order value, the later that view resolver is placed in the chain
+
+## Chapter 7 - Interceptors and Themes
+### Introduction to interceptors
+* Similar to filters in Servlet API
+* Used for pre- and post-proccessing of the request
+* Very common use cases for interceptors could be user authentication, session set up or lock some request data.
+    * Interceptors generally hold that piece of functionality which is the administrative part of your application. You want to keep that separate from the actual business logic which actually runs in the controller.
+    
+![Interceptors](./Interceptors.PNG?raw=true "Interceptors")
+
+### Interceptors in Spring MVC
+* Implementations of _HandlerInterceptorAdapter_
+* Methods:
+    * _preHandle_ - before request is processed
+    * _postHandle_ - after request is processed
+    * _afterCompletion_ - after response is committed
+    
+### Built-In and Custom Interceptors
+* _ThemeChangeInterceptor_
+* _LocaleChangeInterceptor_
+* Custom interceptors should extend _HandlerInterceptorAdapter_
+
+### Interceptors Demo
+![Interceptors Demo](./InterceptorsDemo.PNG?raw=true "Interceptors Demo")
+    
+* Create a LoggingInterceptor.java class and log request data
+* Add the interceptor to registry in the configuration class

@@ -1,6 +1,7 @@
 package com.test.hplus.config;
 
 import com.test.hplus.converter.StringToGenderConverter;
+import com.test.hplus.interceptors.LoggingInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +10,12 @@ import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
-import sun.tools.java.ClassPath;
 
 @Configuration
 @ComponentScan(basePackages = "com.test.hplus")
@@ -76,5 +76,12 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
         threadPoolTaskExecutor.setThreadNamePrefix("hplusapp-thread-");
         return threadPoolTaskExecutor;
+    }
+
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+        // This interceptor works for all paths, but could be specific to /login, for example.
+        registry.addInterceptor(new LoggingInterceptor())
+                .addPathPatterns("/*");
     }
 }
