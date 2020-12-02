@@ -1,5 +1,6 @@
 package com.test.hplus.controllers;
 
+import org.hamcrest.core.IsNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +36,8 @@ public class LoginControllerIntegrationTest {
                         .param("username", USERNAME)
                         .param("password", "admin"))
                 .andExpect(status().isOk())
-                .andExpect(forwardedUrlPattern("/**/search.*"));
+                .andExpect(request().sessionAttribute("login", IsNull.notNullValue()))
+                .andExpect(forwardedUrl("/userprofile"));
     }
 
     @Test
@@ -45,6 +47,7 @@ public class LoginControllerIntegrationTest {
                 .param("username", USERNAME)
                 .param("password", "wrongpassword"))
                 .andExpect(status().isUnauthorized())
+                .andExpect(request().sessionAttribute("login", IsNull.nullValue()))
                 .andExpect(forwardedUrlPattern("/**/error.jsp"));
     }
 
@@ -55,6 +58,7 @@ public class LoginControllerIntegrationTest {
                 .param("username", "invalid")
                 .param("password", "admin"))
                 .andExpect(status().isUnauthorized())
+                .andExpect(request().sessionAttribute("login", IsNull.nullValue()))
                 .andExpect(forwardedUrlPattern("/**/error.jsp"));
     }
 }

@@ -217,3 +217,15 @@ Run application:
     
 * Create a LoggingInterceptor.java class and log request data
 * Add the interceptor to registry in the configuration class
+
+### Access Session/Request attributes
+* Request/Session attributes could flow across controllers/application
+* Stores a model in session using _@SessionAttributes_
+* Access session data using _@SessionAttribute_
+* Access any request data using _@RequestAttribute_
+
+### @SessionAttributes Demo
+* Set up _@SessionAttributes_ for login form, storing the login model in the session. Make sure that we have a _@ModelAttribute_ with the same name as the _@SessionAttributes_. In our application, this model was defined in a _@ControllerAdvice_ in _DefaultModelAttributeController.java_.
+* Create _UserProfileController.java_, for access the model stored in session
+* Retrieve the session attributes in _UserProfileController.java_
+* Forward to _UserProfileController.java_ controller from _LoginController.java_
