@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -21,13 +22,6 @@ public class LoginControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private LoginController loginController;
-
-    @Before
-    public void setUp() {
-    }
 
     @Test
     public void successfulLogin() throws Exception {
@@ -60,5 +54,19 @@ public class LoginControllerIntegrationTest {
                 .andExpect(status().isUnauthorized())
                 .andExpect(request().sessionAttribute("login", IsNull.nullValue()))
                 .andExpect(forwardedUrlPattern("/**/error.jsp"));
+    }
+
+    @Test
+    public void logoutTest() throws Exception {
+        mockMvc.perform(post("/login")
+                .param("username", USERNAME)
+                .param("password", "admin"))
+                .andExpect(status().isOk())
+                .andExpect(request().sessionAttribute("login", IsNull.notNullValue()))
+                .andDo(result ->
+                        mockMvc.perform(get("/logout"))
+                                .andExpect(status().isOk())
+                                .andExpect(request().sessionAttribute("login", IsNull.nullValue()))
+                                .andExpect(forwardedUrlPattern("/**/login.jsp")));
     }
 }

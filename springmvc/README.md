@@ -229,3 +229,7 @@ Run application:
 * Create _UserProfileController.java_, for access the model stored in session
 * Retrieve the session attributes in _UserProfileController.java_
 * Forward to _UserProfileController.java_ controller from _LoginController.java_
+
+### Ending User Session
+* Create a _LogoutController.java_
+* Invalidate session
