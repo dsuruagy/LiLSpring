@@ -233,3 +233,22 @@ Run application:
 ### Ending User Session
 * Create a _LogoutController.java_
 * Invalidate session
+
+### Themes in Spring MVC
+* Static resources - CSS, images
+* Why is a theme required?
+* Define theme using _org.springframework.ui.context.ThemeSource_
+* Default implementation is _ResourceBundleThemeSource_
+* ThemeResolver facilitates resolution
+
+### Spring MVC Resolving Themes Demo
+* Define two separate themes (CSS resources)
+* Define respective properties files for those themes
+* Use one of ThemeResolver to decide which theme to use:
+    * _CookieThemeResolver_
+    * _SessionThemeResolver_
+    * _FixedThemeResolver_
+    
+* Configure _ThemeChangeInterceptor_ to tap a change in theme value for every request
+* Use <spring:theme/> to refer themed keys from .properties file on the JSP
+* Change the theme. For example, access this link: http://localhost:8090/home?theme=client-theme2

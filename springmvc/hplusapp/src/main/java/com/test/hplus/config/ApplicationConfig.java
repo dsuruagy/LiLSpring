@@ -9,10 +9,13 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.servlet.ThemeResolver;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.theme.CookieThemeResolver;
+import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.XmlViewResolver;
@@ -35,6 +38,41 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
                 .addResourceLocations("classpath:/static/css/", "classpath:/static/images/");
     }
 
+
+    @Override
+    protected void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+        configurer.setDefaultTimeout(7000);
+        configurer.setTaskExecutor(mvcTaskExecutor());
+    }
+
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+        // This interceptor works for all paths, but could be specific to /login, for example.
+        registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/*");
+        // Interceptor to change themes based on URL parameters
+        registry.addInterceptor(new ThemeChangeInterceptor());
+    }
+
+    @Override
+    protected void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new StringToGenderConverter());
+    }
+
+    @Bean
+    public ThemeResolver themeResolver() {
+        CookieThemeResolver cookieThemeResolver = new CookieThemeResolver();
+        cookieThemeResolver.setCookieName("theme");
+        cookieThemeResolver.setDefaultThemeName("client-theme1");
+        return cookieThemeResolver;
+    }
+
+    @Bean
+    public AsyncTaskExecutor mvcTaskExecutor() {
+        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        threadPoolTaskExecutor.setThreadNamePrefix("hplusapp-thread-");
+        return threadPoolTaskExecutor;
+    }
+
     @Bean
     public InternalResourceViewResolver jspViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -52,36 +90,10 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
         viewResolver.setOrder(1); // First in the chain
         return viewResolver;
     }
-
-/*    @Bean
-    public ResourceBundleViewResolver resourceBundleViewResolver() {
-        ResourceBundleViewResolver resourceBundleViewResolver = new ResourceBundleViewResolver();
-        resourceBundleViewResolver.setBasename("views");
-        return resourceBundleViewResolver;
-    }*/
-
-    @Override
-    protected void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new StringToGenderConverter());
-    }
-
-    @Override
-    protected void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-        configurer.setDefaultTimeout(7000);
-        configurer.setTaskExecutor(mvcTaskExecutor());
-    }
-
-    @Bean
-    public AsyncTaskExecutor mvcTaskExecutor() {
-        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.setThreadNamePrefix("hplusapp-thread-");
-        return threadPoolTaskExecutor;
-    }
-
-    @Override
-    protected void addInterceptors(InterceptorRegistry registry) {
-        // This interceptor works for all paths, but could be specific to /login, for example.
-        registry.addInterceptor(new LoggingInterceptor())
-                .addPathPatterns("/*");
-    }
+    /*    @Bean
+        public ResourceBundleViewResolver resourceBundleViewResolver() {
+            ResourceBundleViewResolver resourceBundleViewResolver = new ResourceBundleViewResolver();
+            resourceBundleViewResolver.setBasename("views");
+            return resourceBundleViewResolver;
+        }*/
 }
