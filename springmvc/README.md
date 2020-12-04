@@ -250,5 +250,13 @@ Run application:
     * _FixedThemeResolver_
     
 * Configure _ThemeChangeInterceptor_ to tap a change in theme value for every request
-* Use <spring:theme/> to refer themed keys from .properties file on the JSP
+* Use \<spring:theme/\> to refer themed keys from .properties file on the JSP
 * Change the theme. For example, access this link: http://localhost:8090/home?theme=client-theme2
+
+### Automatic Locale Resolution
+* LocaleResolver into play
+* Default implementation: _AcceptHeaderLocaleResolver_
+
+* Add message properties files for different locales on classpath
+* Define key-value properties for labels and error messages
+* Use Spring tags to resolve keys
