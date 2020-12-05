@@ -296,3 +296,5 @@ Run application:
 * _@ResponseEntity_ - information sent back to client about request. For example, if a product is not found, the response would be 404 instead of 200 with an empty body.
 * _@RequestParam_ - receives request parameters
 * _@PathVariable_ - defines path variable in URLs
+* _@RequestBody_ - represents request body
+* _@ExceptionHandler_ - manages exception handling
