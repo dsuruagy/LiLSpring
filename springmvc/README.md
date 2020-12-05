@@ -260,3 +260,8 @@ Run application:
 * Add message properties files for different locales on classpath
 * Define key-value properties for labels and error messages
 * Use Spring tags to resolve keys
+
+### Locale Resolution with Interceptors
+* _CookieLocaleResolver_, _SessionLocaleResolver_
+* Add _CookieLocaleResolver_ to enable the resolution through a cookie
+* Add _LocaleChangeInterceptor_ to intercept language parameter passed as query parameter

@@ -9,16 +9,21 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ThemeResolver;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.theme.CookieThemeResolver;
 import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.XmlViewResolver;
+
+import java.util.Locale;
 
 @Configuration
 @ComponentScan(basePackages = "com.test.hplus")
@@ -51,6 +56,8 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
         registry.addInterceptor(new LoggingInterceptor()).addPathPatterns("/*");
         // Interceptor to change themes based on URL parameters
         registry.addInterceptor(new ThemeChangeInterceptor());
+        // Interceptor to change the locale based on URL locale parameter
+        registry.addInterceptor(new LocaleChangeInterceptor());
     }
 
     @Override
@@ -64,6 +71,14 @@ public class ApplicationConfig extends WebMvcConfigurationSupport {
         cookieThemeResolver.setCookieName("theme");
         cookieThemeResolver.setDefaultThemeName("client-theme1");
         return cookieThemeResolver;
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
+        cookieLocaleResolver.setDefaultLocale(Locale.US);
+        cookieLocaleResolver.setCookieName("locale");
+        return cookieLocaleResolver;
     }
 
     @Bean
