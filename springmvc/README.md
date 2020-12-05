@@ -292,3 +292,7 @@ Run application:
 
 ### Creating RESTful Service with Spring MVC
 * Create a controller using _@Controller_ with _@ResponseBody_
+* Create a controller with _@RestController_
+* _@ResponseEntity_ - information sent back to client about request. For example, if a product is not found, the response would be 404 instead of 200 with an empty body.
+* _@RequestParam_ - receives request parameters
+* _@PathVariable_ - defines path variable in URLs
