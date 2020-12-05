@@ -265,3 +265,30 @@ Run application:
 * _CookieLocaleResolver_, _SessionLocaleResolver_
 * Add _CookieLocaleResolver_ to enable the resolution through a cookie
 * Add _LocaleChangeInterceptor_ to intercept language parameter passed as query parameter
+
+## Chapter 8 - Spring MVC REST Controllers
+### RESTful Web Services
+* REST is REpresentational State Transfer
+* RESTful web service follows an architectural style which helps access resources on the web and return textual representations of it.
+* Action with simple and well-defined operations
+* Promotes interoperability between systems
+* Works with HTTP protocol:
+    * GET
+    * POST/PUT
+    * DELETE
+
+### Data Transfer in REST
+* XML/JSON used to transfer data between client and server
+* JSON vs XML 
+    * XML is strict, requires a predefined schema, heavy and takes time to be transported over the network.
+    * JSON is lightweight, just as string representation of values.
+* JSON needed for AJAX design
+    * pressing need to return JSON, because browsers have a limited capability to work with XML.
+* Spring MVC _MarshallingView_ for XML response to be rendered.
+    * Internally, uses one of many marshallers like JAXB2
+* Spring MVC _HttpMessageConvertors_ for JSON
+    * Internally, uses Jackson.
+* No view name needed - We no longer need to return the name of the next view, because RESTful returns data
+
+### Creating RESTful Service with Spring MVC
+* Create a controller using _@Controller_ with _@ResponseBody_
