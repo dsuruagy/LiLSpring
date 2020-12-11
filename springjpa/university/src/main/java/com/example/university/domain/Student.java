@@ -1,30 +1,37 @@
 package com.example.university.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "STUDENT")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "student_id")
+    @Column(name = "student_id", nullable = false)
     private Integer id;
 
-    @Column(name = "student_fulltime")
-    private boolean fulltime;
+    @Column(name = "student_fulltime", nullable = false)
+    private boolean fullTime;
 
-    @Column(name = "student_age")
+    @Column(name = "student_age", nullable = false)
     private Integer age;
 
     @Embedded
-    private Person person;
+    private Person attendee;
 
     public Student() {
     }
 
+    @ManyToMany()
+    @JoinTable(name = "Enrollment", joinColumns = @JoinColumn(name = "student_id"),
+        inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses = new ArrayList<>();
+
     public Student(Person person, boolean fullTime, int age) {
-        this.person = person;
-        this.fulltime = fullTime;
+        this.attendee = person;
+        this.fullTime = fullTime;
         this.age = age;
     }
 
@@ -36,12 +43,12 @@ public class Student {
         this.id = id;
     }
 
-    public boolean isFulltime() {
-        return fulltime;
+    public boolean isFullTime() {
+        return fullTime;
     }
 
-    public void setFulltime(boolean fulltime) {
-        this.fulltime = fulltime;
+    public void setFullTime(boolean fullTime) {
+        this.fullTime = fullTime;
     }
 
     public Integer getAge() {
@@ -52,11 +59,18 @@ public class Student {
         this.age = age;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getAttendee() {
+        return attendee;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setAttendee(Person attendee) {
+        this.attendee = attendee;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "studentId=" + id + ", " +
+                attendee + ", fullTime=" + fullTime +
+                ", age=" + age + "}\n";
     }
 }

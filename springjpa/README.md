@@ -58,6 +58,7 @@ https://projects.spring.io/spring-data
 ### JPA Examples
 * Create
 
+
 	@PersistenceContext
 	EntityManager entityManager;
 	
@@ -71,8 +72,9 @@ https://projects.spring.io/spring-data
 	}
 	
 * Update
-
-	@PersistenceContext
+    
+    
+    @PersistenceContext
 	EntityManager entityManager;
 	
 	void updateAge(int studentId, int age) {
@@ -81,11 +83,12 @@ https://projects.spring.io/spring-data
 		entityManager.persist(student);
 		entityManager.getTransaction().commit();
 		entityManger.close();
-	}
+	}`
 	
 * Read/Lookup
 
 * Update
+
 
 	@PersistenceContext
 	EntityManager entityManager;
@@ -119,16 +122,20 @@ https://projects.spring.io/spring-data
 ### Delete Methods
 * Spring Data v2
 
+
 	void deleteById(ID id)
 	void deleteAll(Iterable<? extends T>)
 	void delete(T var1)
 	void deleteAll()
 	
 * Spring Data v1.x
+
+
 	void delete(ID id)
 	
 ### Read Methods
 * Spring Data v2
+
 
 	Optional<T> findById(ID id)
 	Iterable<T> findAllById(Iterable<ID> ids)
@@ -137,6 +144,28 @@ https://projects.spring.io/spring-data
 	boolean existsById(ID id)
 	
 * Spring Data v1.x
+
 	
 	T findOne(ID id)
 	Iterable<T> findAll(Iterable<ID> ids)
+	
+### JpaRepository
+All features of _CrudRepository_ plus:
+    
+     void flush();
+     Department saveAndFlush(Department department);
+     void deleteInBatch(Iterable<Department> iterable);
+     void deleteAllInBatch();
+     
+Benefits
+* No need to acces EntityManagerFactory to flush, for example. We could just call the method, like above. 
+* Differentiate from other data repositories. It helps applications to access many types of data stores:
+    * MongoRepository: MongoDB
+    * SolrCrudRepository: Apache Solr
+    * GemfireRepository: Pivotal GemFire
+    
+### Simple Query Method Property Expression Rules
+1. Return type
+2. findBy
+3. Entity attribute name (use camel case)
+4. Optionally, chain subattribute names (i.e., findByAttendeeLastName)
