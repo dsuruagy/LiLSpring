@@ -3,7 +3,7 @@ package com.example.university.repo;
 import com.example.university.domain.Course;
 import com.example.university.view.CourseView;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -28,5 +28,5 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     Iterable<Course> findByCredits(int credit);
 
-    Page<Course> findByCredits(int credit, PageRequest of);
+    Page<Course> findByCredits(int credit, Pageable pageable);
 }
