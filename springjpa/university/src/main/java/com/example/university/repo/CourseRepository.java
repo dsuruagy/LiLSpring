@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     Iterable<Course> findByDepartmentChairMemberLastName(String lastName);
 
     @Query("Select c from Course c where c.department.chair.member.lastName=:chair")
     Iterable<Course> findByChairLastName(@Param("chair") String chairLastName);
 
-    Course findByName(String name);
+    Optional<Course> findByName(String name);
 
     @Query(value = "SELECT * FROM Course c WHERE course_name = ?1", nativeQuery = true)
     Course findByNameSQL(String s);
@@ -24,7 +26,7 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
 
     @Query("select new com.example.university.view.CourseView" +
             "(c.name, c.instructor.member.lastName, c.department.name) from Course c where c.id = ?1")
-    CourseView getCourseView(Integer id);
+    Optional<CourseView> getCourseView(Integer id);
 
     Iterable<Course> findByCredits(int credit);
 

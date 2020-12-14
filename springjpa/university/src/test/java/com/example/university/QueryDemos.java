@@ -112,21 +112,22 @@ public class QueryDemos {
 
 
         //*******Complex Queries********
-        Course english101 = courseRepository.findByName("English 101");
-
         //SELECT * FROM Course c WHERE course_name = ?1
         System.out.println("\nFind course 101 using a native query\n " +
                 courseRepository.findByNameSQL("English 101"));
 
-        //Select c from Course c join c.prerequisites p where p.id = ?1
-        System.out.println("\nFind Courses where English 101 is a prerequisite");
-        courseRepository.findCourseByPrerequisite(english101.getId())
-                .forEach(System.out::println);
+        courseRepository.findByName("English 101").ifPresent(english101 -> {
 
-        //Select new com.example.university.view.CourseView
-        //  (c.name, c.instructor.member.lastName, c.department.name) from Course c where c.id=?1
-        System.out.println("\nCourseView for English 101 \n" +
-                courseRepository.getCourseView(english101.getId()));
+            //Select c from Course c join c.prerequisites p where p.id = ?1
+            System.out.println("\nFind Courses where English 101 is a prerequisite");
+            courseRepository.findCourseByPrerequisite(english101.getId())
+                    .forEach(System.out::println);
+
+            //Select new com.example.university.view.CourseView
+            //  (c.name, c.instructor.member.lastName, c.department.name) from Course c where c.id=?1
+            System.out.println("\nCourseView for English 101 \n" +
+                    courseRepository.getCourseView(english101.getId()));
+        });
     }
 
     /**
