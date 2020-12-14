@@ -169,3 +169,47 @@ Benefits
 2. findBy
 3. Entity attribute name (use camel case)
 4. Optionally, chain subattribute names (i.e., findByAttendeeLastName)
+
+## Chapter 4 - Query by Example
+### Query by Example
+* User-friendly alternative to SQL
+* Lookup objects similar to another object
+* Independent of underlying datastore
+* Frequently refactored code
+* Code requiring nested property constraints or complex string matching
+
+
+    JPARepository<Department, Integer> extends QueryByExampleExecutor<Department>
+    
+####Available methods
+
+    List<Department> findAll(Example<Department> example);
+    List<Department> findAll(Example<Department> example, Sort sort);
+    Optional<Department> findOne(Example<Department> example);
+    Page<Department> findAll(Example<Department> example, Pageable pageable);
+    long count(Example<Department> example);
+    boolean exists(Example<Department> example);
+    
+### Example<T> example = Example.of(T probe);
+Given the following Constructors:
+
+    Department(String name, Staff chair)
+    Staff(Person member)
+    Person(String firstName, String lastname)
+
+Find the department with the name "Humanities":
+
+    departmentRepository.findOne(Example.of(new Department("Humanities", null)));
+    
+Find all departments whose chair has the first name of "John":
+
+    departmentRepository.findAll(Example.of(new Department(null, 
+                                            new Staff(new Person("John", null)))));
+    
+### Example<T> example = Example.of(T probe, ExampleMatcher matcher);
+Find all departments with the name ending in sciences; ignore case:
+
+    departmentRepository.findAll(Example.of(new Department("sciences", null),
+                    ExampleMatcher.matching().
+                            withIgnoreCase().
+                            withStringMatcher(ExampleMatcher.StringMatcher.ENDING)))
