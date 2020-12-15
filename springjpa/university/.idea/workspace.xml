@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4e4f4ae5-8f05-4275-92eb-e8b9c8f49ab9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../1-mapDBToJavaClass.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/1-mapDBToJavaClass.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2-mapMultipleTablesToJavaClass.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/2-mapMultipleTablesToJavaClass.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../3-mapRelationships.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/3-mapRelationships.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4-mapJoinColumn.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/4-mapJoinColumn.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../5-ExpandedDomainModel.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/5-ExpandedDomainModel.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/UniversityApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/UniversityApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/domain/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/domain/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/domain/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/domain/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/domain/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/domain/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/domain/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/domain/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/domain/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/domain/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repo/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/repo/CourseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repo/DepartmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/repo/DepartmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repo/StaffRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/repo/StaffRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/repo/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/repo/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/university/view/CourseView.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/java/com/example/university/view/CourseView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/CrudRepositoryDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/test/java/com/example/university/CrudRepositoryDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/DebuggingDemos.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/test/java/com/example/university/DebuggingDemos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/JpaRepositoryDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/test/java/com/example/university/JpaRepositoryDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/university/QueryDemos.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../spring-data/university/src/test/java/com/example/university/QueryDemos.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Users\cyfs\dev\IDEs\ideaIC\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1lMsDOy9TllbYUl7k5RfLgwqlJ4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../spring-data/university-MongoDB" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\cyfs\dev\projetos\linkedinLearning\springjpa\university" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.university.domain" />
+      <recent name="com.example.university.repo" />
+      <recent name="com.example.university" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.QueryDemos.jpqlQueries">
+    <configuration name="QueryDemos.intermediateQueryExamples" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="university" />
+      <option name="PACKAGE_NAME" value="com.example.university" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.QueryDemos" />
+      <option name="METHOD_NAME" value="intermediateQueryExamples" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDemos.jpqlQueries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="university" />
+      <option name="PACKAGE_NAME" value="com.example.university" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.QueryDemos" />
+      <option name="METHOD_NAME" value="jpqlQueries" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDemos.pagingAndSortingQueries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="university" />
+      <option name="PACKAGE_NAME" value="com.example.university" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.QueryDemos" />
+      <option name="METHOD_NAME" value="pagingAndSortingQueries" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDemos.queryByExample" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="university" />
+      <option name="PACKAGE_NAME" value="com.example.university" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.QueryDemos" />
+      <option name="METHOD_NAME" value="queryByExample" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QueryDemos.simpleQueryExamples" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="university" />
+      <option name="PACKAGE_NAME" value="com.example.university" />
+      <option name="MAIN_CLASS_NAME" value="com.example.university.QueryDemos" />
+      <option name="METHOD_NAME" value="simpleQueryExamples" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.QueryDemos.jpqlQueries" />
+        <item itemvalue="JUnit.QueryDemos.queryByExample" />
+        <item itemvalue="JUnit.QueryDemos.pagingAndSortingQueries" />
+        <item itemvalue="JUnit.QueryDemos.intermediateQueryExamples" />
+        <item itemvalue="JUnit.QueryDemos.simpleQueryExamples" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4e4f4ae5-8f05-4275-92eb-e8b9c8f49ab9" name="Default Changelist" comment="" />
+      <created>1607418175958</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607418175958</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Spring Data 2: CrudRepository interface for entities">
+      <created>1607420130375</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607420130375</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Simple Query Method Property Expression Rules">
+      <created>1607681693111</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607681693111</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Query method clauses and expressions">
+      <created>1607938115786</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1607938115786</updated>
+    </task>
+    <task id="LOCAL-00004" summary="@Query query methods">
+      <created>1607939105317</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1607939105317</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Paging and sorting">
+      <created>1607940194349</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1607940194349</updated>
+    </task>
+    <task id="LOCAL-00006" summary="QueryByExample">
+      <created>1607941303236</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1607941303236</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Optional&lt;&gt; query response">
+      <created>1607942026792</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1607942026792</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Spring Data 2: CrudRepository interface for entities" />
+    <MESSAGE value="Simple Query Method Property Expression Rules" />
+    <MESSAGE value="Query method clauses and expressions" />
+    <MESSAGE value="@Query query methods" />
+    <MESSAGE value="Paging and sorting" />
+    <MESSAGE value="QueryByExample" />
+    <MESSAGE value="Optional&lt;&gt; query response" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optional&lt;&gt; query response" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="285" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1607679131963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="285" y="204" key="#com.intellij.ide.util.MemberChooser/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607679131963" />
+    <state x="217" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1607596025006">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="217" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607596025006" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1607418315106">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607418315106" />
+    <state x="260" y="278" key="FileChooserDialogImpl" timestamp="1608022747562">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="260" y="278" key="FileChooserDialogImpl/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1608022747562" />
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom" timestamp="1607942035195">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.bottom/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607942035195" />
+    <state width="1877" height="285" key="GridCell.Tab.0.center" timestamp="1607942035195">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.center/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607942035195" />
+    <state width="1877" height="285" key="GridCell.Tab.0.left" timestamp="1607942035195">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.left/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607942035195" />
+    <state width="1877" height="285" key="GridCell.Tab.0.right" timestamp="1607942035195">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="285" key="GridCell.Tab.0.right/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607942035195" />
+    <state x="10" y="175" key="Maven.ArtifactSearchDialog" timestamp="1607419387165">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="10" y="175" key="Maven.ArtifactSearchDialog/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607419387165" />
+    <state x="0" y="168" key="SettingsEditor" timestamp="1607591629118">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="168" key="SettingsEditor/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607591629118" />
+    <state x="121" y="253" width="700" height="530" key="recent.locations.popup" timestamp="1607937881823">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="121" y="253" width="700" height="530" key="recent.locations.popup/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607937881823" />
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1607591360775">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="143" y="230" width="672" height="678" key="search.everywhere.popup/266.1080.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1607591360775" />
+  </component>
+</project>
