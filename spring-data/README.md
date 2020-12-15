@@ -213,3 +213,25 @@ Find all departments with the name ending in sciences; ignore case:
                     ExampleMatcher.matching().
                             withIgnoreCase().
                             withStringMatcher(ExampleMatcher.StringMatcher.ENDING)))
+                            
+## Chapter 5 - More Repository Types
+### Spring Data JDBC
+#### Java Persistent API (Hibernate)
+**Pros**
+* Lazy loading, caching, dirty tracking
+
+**Cons**
+* Expensive SQL statements (using lazy loading) and unexpected exceptions
+* External database updates not in cache (caching hides recent updates to the database)
+* Point of operator persistent not obvious (dirty entity makes it difficult to locate the point of operation persistence)
+
+#### Spring Data JDBC Repositories
+**Pros**
+* Simpler model, SQL issued when needed, fully loaded object 
+    * bypasses lazy loading, caching, dirty tracking
+    * SQL queries are issued when and only when you invoke a repository method and return a fully loaded object.
+    
+**Cons**
+* Many-to-one and many-to-many relationships not supported
+
+* Parent and child object lifecycles coupled (following the principles of DDD)
