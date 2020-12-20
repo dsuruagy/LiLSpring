@@ -14,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Objects;
+
 /**
  * Demonstrate Various Querying Techniques with Spring Data MongoDb
  *
@@ -41,7 +43,7 @@ public class MongoDbDemos {
         //***************Staff query methods***************
 
         //Paging and Sorting Queries
-        System.out.println("\nFind all staff members, sort alphabetically by last name");
+/*        System.out.println("\nFind all staff members, sort alphabetically by last name");
         Sort sortByLastName = new Sort(Sort.Direction.ASC, "member.lastName");
         staffRepository.findAll(sortByLastName).forEach(System.out::println);
 
@@ -79,7 +81,7 @@ public class MongoDbDemos {
 
         //Invalid Method, will fail at runtime
         System.out.println("\nInvalid Method, cannot cross DBRef's in queries");
-        departmentRepository.findByChairMemberLastName("Jones");
+        departmentRepository.findByChairMemberLastName("Jones");*/
     }
     @Before
     @After
