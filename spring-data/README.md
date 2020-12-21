@@ -235,3 +235,90 @@ Find all departments with the name ending in sciences; ignore case:
 * Many-to-one and many-to-many relationships not supported
 
 * Parent and child object lifecycles coupled (following the principles of DDD)
+
+## Chapter 6 - Special Features
+### QueryDSL Spring data extension
+Spring data query methods are static. To filter by age, fulltime and age, it requires 7 static methods with some possibilities on StudentRepository, for example.
+
+QueryDSL is a dynamic search criteria framework that works with many data sources, as JPA and MongoDB. Spring Data provides an extension by the _QueryDslPredicateExecutor\<Entity\>_.
+
+The available methods are:
+
+    // Predicate is the search criteria
+    Student findOne(Predicate predicate);
+    Iterable<Student> findAll(Predicate predicate);
+    Iterable<Student> findAll(Predicate predicate, Sort sort);
+    Page<Student> findAll(Predicate predicate, Pageable pageable);
+    long count(Predicate predicate);
+    boolean exists(Predicate predicate);
+
+The QueryDSL annotation processors generates Q-classes from entities. Q-classes are search criteria helpers to create BooleanExpression, the building blocks of predicates:
+
+    public class StudentExpressions {
+        public static BooleanExpression hasLastName(String lastName) {
+            return QStudent.student.attendee.lastName.eq(lastName);
+        }
+        public static BooleanExpression isFullTime() {
+            return QStudent.student.fullTime.eq(true);
+        }
+        public static BooleanExpression isOlderThan(int age) {
+            return QStudent.student.age.gt(age);
+        }
+    }
+    
+We can use calls from the repository as following:
+
+    studentRepository.findAll(hasLastName("Smith").and(isFullTime()).and(isOlderThan(20));
+    studentRepository.findAll(isFullTime().or(isOlderThan(20));
+    studentRepository.findAll(hasLastName("Smith").and(isOlderThan(20));
+    
+### Auditing
+Spring Data provides many ways to implement Auditing in our applications:
+#### Entity Annotations
+One is as following:
+
+    @CreatedDate
+    @Column
+    private ZoneDataTime createdAt;
+    
+    @LastModifiedBy
+    @Column
+    private User updatedBy;
+    
+    @CreatedBy
+    @Column
+    private User createdBy;
+    
+    @LastModifiedBy
+    
+#### Implementing Auditable and Extending AbstractAuditable
+Or using this:
+
+    public class Staff extends AbstractAuditable<User, Integer> implements Auditable<User, Integer> {}
+    
+    public Abstract class AbstractAuditable<U, PK extends Serializable> extends AbstractPersistable<PK> implements Auditable<U, PK> {
+        private static final long serialVersionUID = 1417182213232323L;
+        @ManyToOne
+        private U createdBy;
+        
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date createdDate;
+        
+        @ManyToOne
+        private U lastModifiedBy;
+        
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date lastModifiedDate;
+    }
+    
+Either way, we need to pull the user of the session and inject into the entity. Implemented by the AuditorAware:
+
+    public class SpringSecurityAuditorAware implements AuditorAware<User> {
+        Public User getCurrentAuditor() {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null || !authentication.isAuthenticaded()) {
+                return null;
+            }
+            return ((MyUserDetails) authentication.getPrincipal()).getUser();
+        }
+    }
