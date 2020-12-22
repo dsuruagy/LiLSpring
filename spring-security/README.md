@@ -32,3 +32,5 @@
 **WARNING** 
 * This is not for production use cases in most scenarios
 * This is part of the progression of learning only
+
+### JDBC authentication
