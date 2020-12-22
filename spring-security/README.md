@@ -27,3 +27,8 @@
 
 ### Implementing basic authentication
 * By adding spring-boot-starter-security dependency, Spring provides basic forms-based authentication for our application.
+
+### In-memory authentication
+**WARNING** 
+* This is not for production use cases in most scenarios
+* This is part of the progression of learning only
