@@ -34,3 +34,10 @@
 * This is part of the progression of learning only
 
 ### JDBC authentication
+
+### Leveraging bcrypt for Hashing
+#### Password Rules
+* Never store plaintext
+* Never encrypt
+* SHA-256 is considered crackable
+* bcrypt is the best option today
