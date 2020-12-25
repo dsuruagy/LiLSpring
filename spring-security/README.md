@@ -41,3 +41,14 @@
 * Never encrypt
 * SHA-256 is considered crackable
 * bcrypt is the best option today
+
+### Authorization
+1. create auth.AuthGroup entity
+2. create auth.AuthGroupRepository with a method to get AuthGroups by username
+3. Add a list of AuthGroup in auth.LandonUserPrincipal. Change getAuthorities() to return grantedAuthorities created with the AuthGroup name. 
+4. Add the LandonUserPrincipal AuthGroup initialization on LandonUserDetailsService.loadUserByUsername().
+5. Use @PreAuthorize to control access to the methods getGuests(), getGuest() to ROLE_USER, and getAddGuestForm(), addGuest(), updateGuest() to ROLE_ADMIN. 
+6. ApplicationSecurityConfiguration:
+	* @EnableGlobalMethodSecurtiy(prePostEnable = true), to enable method security.
+	* On our database, we only have values USER and ADMIN, but in our methods we have ROLE_USER and ROLE_ADMIN. We need to map these values with a bean GrantedAuthoritiesMapper. Set into authenticationProvider().
+	
