@@ -52,3 +52,19 @@
 	* @EnableGlobalMethodSecurtiy(prePostEnable = true), to enable method security.
 	* On our database, we only have values USER and ADMIN, but in our methods we have ROLE_USER and ROLE_ADMIN. We need to map these values with a bean GrantedAuthoritiesMapper. Set into authenticationProvider().
 	
+### Form-based authentication
+#### Basic Authentication
+* Basic is in the spec; forms isn't
+* Cannot support logging off
+* No real security implications with either, assuming TLS is used
+
+#### Forms-Based Authentication
+* Allows you to customize the form
+* Allows for a more seamless view in your application
+* Provides "remember me" options
+* Provides logout
+
+#### Steps
+* Implement login form
+* Implement logout page
+* Turn it on (change from basic authentication to forms-based authentication)
