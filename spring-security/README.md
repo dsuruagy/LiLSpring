@@ -1,12 +1,12 @@
 #Spring: Spring Security
 22/12/2020
 
-	
+## Chapter 1 - Spring Security Concepts	
 ### Some terminology
 * PII - Personal Identifiable Information
 
-##Authentication vs. authorization
-###Authentication
+###Authentication vs. authorization
+####Authentication
 * Determination of who
 * Technically it is the determination if a principal is who they say they are
 * Principal can be humans or machines
@@ -16,7 +16,7 @@
 	* OpendID, Jasig CAS (Central Authentication Service) JASS (internet)
 	* Kerberos and SAML
 
-### Authorization
+#### Authorization
 * Determines what the principal can or cannot do
 * Authorization is based on authentication
 * Authorization is called access control
@@ -25,6 +25,7 @@
 	* Method invocation
 	* Domain object instance access control
 
+## Chapter 2 - Securing Web Applications with Spring
 ### Implementing basic authentication
 * By adding spring-boot-starter-security dependency, Spring provides basic forms-based authentication for our application.
 
@@ -68,3 +69,43 @@
 * Implement login form
 * Implement logout page
 * Turn it on (change from basic authentication to forms-based authentication)
+
+## Chapter 3 - LDAP Authentication
+### LDAP for authentication
+#### Why LDAP
+* LDAP is lightweight, especially for user authentication - Lightweight Directory Access Protocol
+* Built into many operating systems
+* Interoperability
+* Scalability
+
+#### Spring Security LDAP
+* spring-security-ldap project
+* Full support for native LDAP operators
+* Password-hashing algorithms included
+
+#### Paradigm
+* Very similar to basic and forms-based authentication
+* Leverages AuthenticationManagerBuilder in the same manner
+
+#### Internal LDAP
+* Use embedded LDAP
+* Can use OpenLDAP if you prefer
+* AD is not LDAP, but can use LDAP for authentication
+
+### Configuring an Embedded LDAP Server
+* Add dependencies:
+    * spring-security-ldap
+    * unboundid-ldapsdk
+    
+* application.properties:
+    * spring.ldap.embedded.ldif (points to the file with the LDAP structure)
+    * spring.ldap.embedded.base-dn
+    * spring.ldap.embedded.port
+    
+### Implementing LDAP for authentication
+* Remove everything related to JDBC (com.frankmoley.security.app.auth package)
+* Remove JPA and H2 dependencies from the pom.xml file
+* Remove data.sql and schema.sql files
+* Configure LDAP authentication in ApplicationSecurityConfiguration file:
+    * remove the LandonUserDetailService and DAOAuthenticationProvider.
+    * fill the configure with LDAP authentication related code. 
