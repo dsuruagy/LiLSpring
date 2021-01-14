@@ -192,3 +192,18 @@
 * Encode username:password in base64: http://www.tuxgraphics.org/toolbox/base64-javascript.html:
     guest_app:secret - Z3Vlc3RfYXBwOnNlY3JldA==
     api_audit:secret - YXBpX2F1ZGl0OnNlY3JldA==
+  
+* http --form POST localhost:8100/oauth/token Authorization:"Basic Z3Vlc3RfYXBwOnNlY3JldA==" grant_type=client_credentials
+
+* http --form localhost:8100/oauth/check_token Authorization:"Bearer 04681532-53b0-422e-bc24-8a43b9f0e279" token=04681532-53b0-422e-bc24-8a43b9f0e279
+
+### Client-side implementations of OAuth2
+* If we start our application and try to authenticate with LDAP, the client will show an error with status code of 500 (401 unauthorized is the cause).
+
+* Guest-app application
+    * Add spring-security-oauth2 (version 2.3.0.RELEASE) dependency
+    * Change the com.frankmoley.security.app.service.GuestService class:
+        * Add a constructor to receive a restTemplate.
+    * Change the com.frankmoley.security.app.GuestAppApplication:
+        * Add @EnableOauth2Client
+        * 
