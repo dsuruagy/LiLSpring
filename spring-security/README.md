@@ -219,3 +219,14 @@
 * Inject the Mono<Principal> into methods where you want a handle to it
 * Still provides core functionality
 
+### WebFlux basic security
+At first, these requests will return to the console without constraints:
+
+    http localhost:8080/hello
+    http localhost:8080/roll
+
+We want to restrict the access to the roll application. So, the changes to the code were made to achieve it. Now, if we try to call the roll application, we'll receive a 401 Unauthorized. We could try to use these requests now:
+
+    http localhost:8080/roll (401 Unauthorized)
+    http localhost:8080/roll -a fpmoles:password (200 OK)
+    http localhost:8080/roll -a jdoe:foobar (403 Forbidden)
