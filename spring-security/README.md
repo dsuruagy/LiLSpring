@@ -109,3 +109,86 @@
 * Configure LDAP authentication in ApplicationSecurityConfiguration file:
     * remove the LandonUserDetailService and DAOAuthenticationProvider.
     * fill the configure with LDAP authentication related code. 
+    
+### AD vs. LDAP for authentication    
+#### AD is Not LDAP
+* Active Directory implements an LDAP API
+* Directory Services exposed via AD Lightweight Directory Services exposed as an LDAP interfaces
+* AD provides many, many more services and looking at the port requirements you can get a real feel for the weight
+
+#### Authentication with AD
+* Uses standard and non-standard methods
+* Configuration should be very familiar, however
+* Nested groups -> SEC-1823
+
+#### Authentication Provider
+* ActiveDirectoryLdapAuthenticationProvider
+* Utilized via configure method of WebSecurityConfigurerAdapter
+* Mostly the same as standard LDAP
+* Group to role matching work
+
+## Chapter 4 - Leveraging OAuth 2 with Spring Security
+### OAuth 2
+#### What is OAuth2
+* Protocol and framework for providing access to HTTP services
+* Often used for third-party access
+* Can be used for system-to-system communications in standalone or on behalf of a user
+
+#### Parts of OAuth 2
+* Resource owner - often the user
+* Client - application requesting access
+* Resource server - hosts protected data and accounts
+* Authorization server - service that grants tokens
+
+#### Token Types
+* Access token - the secret and often short-lived token that identifies a user
+* Refresh token - longer-lived token used to renew access token when it expires
+* Scopes provide for rights associated with the access token
+
+#### Grants
+* Several grant types that impact flows
+* Authorization code grant is most common
+* Implicit is common in web apps and mobile apps
+* Client credentials grant is useful in system-to-system comms
+
+### Spring and OAuth 2
+#### CommonOAuth2Provider 
+* Provides native support for Okta, Google, GitHub and Facebook
+* Property-based configuration in Spring Boot
+* Client-side OAuth integration
+
+#### Authorization Server
+* Provides authorization services to the system
+* @EnableAuthorizationServer
+* AuthorizationServerConfigurerAdapter used to configure it
+* Supports various grant types
+
+#### Resource Server
+* Provides the resources being protected
+* @EnableResourceServer
+
+#### OAuth2 Client
+* Full client-side support
+* @EnableOauth2Client
+* Oauth2RestTemplate provides much of the scaffolding
+* Supports various grant types
+
+### Creating an OAuth authorization service
+* Guest-services application
+    * Add spring-security-oauth2 (version 2.3.0.RELEASE) dependency
+    * Create a new package: com.frankmoley.security.services.auth
+    * Create a new class: AuthorizationServerConfig:
+        @EnableAuthorizationServer
+        @Configuration
+        extends AuthorizationServerConfigurerAdapter
+        
+        override configure methods
+        
+### Creating an OAuth resource service
+* Guest-services application
+    * GuestServicesApplication 
+        Add @EnableResourceServer
+        
+* Encode username:password in base64: http://www.tuxgraphics.org/toolbox/base64-javascript.html:
+    guest_app:secret - Z3Vlc3RfYXBwOnNlY3JldA==
+    api_audit:secret - YXBpX2F1ZGl0OnNlY3JldA==
