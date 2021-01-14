@@ -206,4 +206,16 @@
         * Add a constructor to receive a restTemplate.
     * Change the com.frankmoley.security.app.GuestAppApplication:
         * Add @EnableOauth2Client
-        * 
+
+## Chapter 5 - WebFlux security
+### Introduction to WebFlux security
+#### @EnableWebFluxSecurity
+* Basic config maps everything to security
+* SecurityWebFilterChain provides more fine-grained control
+* MapReactiveUserDetailsService provides handle to UserDetailsServices
+
+#### Principal
+* Security model still based on principal
+* Inject the Mono<Principal> into methods where you want a handle to it
+* Still provides core functionality
+
