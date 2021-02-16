@@ -16,3 +16,21 @@
 Inside the crm folder, type this command:
 
     npx create-react-app client
+
+## Chapter 2 - Spring Models
+### Define first model class
+* create a model folder inside src/main/java/com/crm
+* create a class Contact.java
+    * id (long)
+    * firstName
+    * lastName
+    * email
+
+### JPA Repository
+* inside model folder, create a new file ContactRepository.java that extends CrudRepository
+
+### Define example data
+* inside model folder, create DemoLoader.java that:
+    * Implements CommandLineRunner interface
+    * Has the above repository autowired
+    * Override the run() method to save a new contact into the repository.
