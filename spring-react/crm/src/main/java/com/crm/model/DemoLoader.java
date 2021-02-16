@@ -10,18 +10,15 @@ import org.springframework.stereotype.Component;
 public class DemoLoader implements CommandLineRunner{
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //@Autowired
+    @Autowired
     public ContactRepository repository;
 
-    @Autowired
-    //public DemoLoader() {
-    public DemoLoader(ContactRepository repository) {
-        logger.debug("******** Instantiate DemoLoader");
-        this.repository = repository;
+    public DemoLoader() {
     }
 
     @Override
     public void run(String... args) throws Exception {
+        logger.debug("******** Instantiate DemoLoader");
         repository.save(new Contact("Daniel", "Monteiro", "dsuruagy@gmail.com"));
 
     }

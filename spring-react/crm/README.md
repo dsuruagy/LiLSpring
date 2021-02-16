@@ -34,3 +34,8 @@ Inside the crm folder, type this command:
     * Implements CommandLineRunner interface
     * Has the above repository autowired
     * Override the run() method to save a new contact into the repository.
+
+## Chapter 2 - HTTP with Spring
+### Finalize base server
+Insert into application.properties files:
+    * spring.data.rest.base-path=/api
