@@ -61,3 +61,10 @@ Insert into application.properties files:
 * Create SingleContact.js file and copy the code from Components > Cards from Materialize inside its function.
 
 * Create AddContact.js file and copy the code from Forms > Text Inputs from Materialize inside its function.
+
+### Add server controller for CORS
+* When trying to run the application, no data is presentes and an error message is shown on the browser console:
+
+    "Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource at http://localhost:8080/api/contacts. (Reason: CORS header ‘Access-Control-Allow-Origin’ missing)."
+
+* The reason is that the frontend and backend are running on different ports (3000 and 8080). To prevent this, it's necessary to add a new RestController. 
