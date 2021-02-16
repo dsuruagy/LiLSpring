@@ -57,3 +57,7 @@ Insert into application.properties files:
     * get the links Get Started > CDN and post into the head of public/index.html
     * components > icons inside the body of index.html.
 
+### Create and structure your components
+* Create SingleContact.js file and copy the code from Components > Cards from Materialize inside its function.
+
+* Create AddContact.js file and copy the code from Forms > Text Inputs from Materialize inside its function.
