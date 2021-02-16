@@ -38,14 +38,22 @@ Inside the crm folder, type this command:
 ## Chapter 2 - HTTP with Spring
 ### Finalize base server
 Insert into application.properties files:
-    * spring.data.rest.base-path=/api
+
+    spring.data.rest.base-path=/api
 
 ## Chapter 3 - Basic Frontend with React
 ### Create contact listing component
-1) Inside the client folder, run
+* Inside the client folder, run
 
     npm start
 
-2) Edit the App.js file, removing code between divs, and insert an element of Contact component.
+* Edit the App.js file, removing code between divs, and insert an element of Contact component.
 
-3) Create the file ./components/contact.js, with the code to render "Hello" and initialize the state with an empty contacts array.
+* Create the file ./components/contact.js, with the code to render "Hello" and initialize the state with an empty contacts array.
+
+### Add materialize to the project
+* On the https://materializecss.com/ website:
+
+    * get the links Get Started > CDN and post into the head of public/index.html
+    * components > icons inside the body of index.html.
+

@@ -1,10 +1,17 @@
-import Contact from './components/contact';
+import Contact from './components/Contacts';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Contact/>
+    <div className="container-fluid">
+      <nav>
+        <div className="nav-wrapper center-align">
+          <a href="/" className="brand-logo">Contacts</a>
+        </div>
+      </nav>
+      <div className="row">
+        <Contact/>
+      </div>
     </div>
   );
 }
