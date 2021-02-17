@@ -25,7 +25,7 @@ export default class Contact extends Component {
             </div>
             <div className="row">
                 { this.state.contacts.map((item) => {
-                    <SingleContact key={item.id} item={item}/>
+                    return <SingleContact key={item.id} item={item}/>
                 })}
             </div>
         </div>
