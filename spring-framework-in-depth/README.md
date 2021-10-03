@@ -176,6 +176,104 @@ Some considerations when using proxies:
 * For example, with some JDBC template code using transactions, internal calls will not work because the rollback on exception wasn't handled because it wasn't part of the proxy because it was an internal method. Don't call reference methods on the same class and expect them to have behavior added to them by the proxy.
 
 ## Chapter: 3. Component Scanning
-With Spring Boot, the auto-configuration is partially achieved through component scanning mixed with conditional configurations. In fact for many classes external configuration isn't needed as component scanning can solve the configuration.
+Auto-configuration, which happens when using Spring Boot, can be achieved through Component Scanning. 
+
+* The _@Component_ is the root annotation that indicates that the class should be loaded into the BeanFactory, but we can use one of its stereotypes, like _@Service_ which can be used to write aspects to add behavior to classes based on type. 
+
+* It scans the base package and its sub-packages, loading configuration automatically for each bean it finds. It uses other annotations to direct the IOC container to build the dependency graph.
+```
+@Configuration
+@PropertySource("classpath:application.properties")
+@ComponentScan(basePackages = "com.frankmoley.lil.fid")
+public class ApplicationConfig {
+
+}
+```
+  * If a dependency is required it should be set on the constructor. If it's not, should be on the setter.
+  * Dependency injection is achieved mainly through the annotation _@Autowired_. This instructs the IOC container to inject a bean into the needed value at that point. While you can put it on a class attribute, you should only set it on methods.
+  * If you have more than one bean of the same type you can use the _@Qualifier_ annotation to inject a specific version by name.
+  * Properties or constants can be injected using the _@Value_ annotation to instruct the IOC container to put a value into a variable for use elsewhere.
+```
+@Service
+public class OutputService {
+@Value("${app.name}")
+private String name;
+
+    private final GreetingService greetingService;
+    private final TimeService timeService;
+
+    /**
+     * Not default constructor used to instantiate OutputService, that requires two arguments.
+     * As there is no default constructor, the Autowired annotation is optional here, because
+     * Spring knows that it should auto wire dependencies to create a new instance.
+     *
+     * It was used to make it more explicit here.
+     * @param greetingService
+     * @param timeService
+     */
+    @Autowired
+    public OutputService(GreetingService greetingService, TimeService timeService){
+        this.greetingService = greetingService;
+        this.timeService = timeService;
+    }
+```
+
+## Chapter: 4. The Bean Lifecycle
+### Lifecycle methods
+Sometimes you have behavior, that you need to perform within a class, that requires the dependency injection to be completed, but this behavior either needs to be done before the application is ready for use, or right before it's destroyed. Enter into the picture, Lifecycle Methods.
+
+While Spring is Starting up, the system itself is not usable and this can, occur in the same way during shut down. Spring proxies are not always available during object instantiation, or after destruction has started. This means that not everything is available from a spring perspective, including the framework itself during the construction of an application that you may need behavior-wise in order to perform some task. This will also again apply during the destruction phase as you have no control over the order of garbage collection and you need a way to do some work before Spring goes out of scope.
+
+One thing to note is that these annotations we're going to talk about for these life cycle methods, utilize JSR 250 annotations. These are not Spring specific, so you won't get Spring into your classes when you use these.
+
+* Post Construction is a method that should be executed after construction of the object. Again in the spring world, this allows us to construct the object as part of the IOC lifecycle, which we're going to talk about next, but then do some work using Spring before we hand it off to the actual run time or use phase of the application. The annotation on this method is _@PostConstruct_. 
+  * This method has some special cases. It must be a void method. It takes no parameters as the framework itself will run this method. Used, for example, to warming in memory Caches of data, like to make both web service calls as well as database calls to store some data in memory. So by using PostConstruct, I had Spring available, but the application wasn't running, in a state that this Cache would not be pre warmed.
+  * This method is technically called, after all property setting is completed. But it's important to know that you can also use Optional Dependencies for your class during this Post construct method.
+  * Example: _@PostConstruct public void init_ - it makes sense to call it _init_.
+
+* Pre Destroy is a method that is executed before the class itself is marked for garbage collection. The annotation is _@PreDestroy_ and this is very useful when you need to capture some state before the application closes, and send it to a backing database again, that may be using some form of a Spring abstraction.
+  * this is executed technically right when the application context itself closes, so encloses called on that context object. And again, this is well before any garbage collection can take place.
+  * _@PreDestroy public void destroy_ - it's guaranteed that this will be called, when the application shuts down, through normal operations before, Spring itself goes out of context. 
+
+### The bean lifecycle
+There are three primary phases of the Spring lifecycle:
+1) The **initialization phase**, and it by far is the most complex and quite frankly the most interesting of all of the lifecycle elements. While in reality it is one of the shortest phases in chronological time of the three, it is really where we can impact the behavior of our application the most.
+2) The **use phase**. The largest majority of time is actually spent in this phase, but most of the interaction with the Spring IOC container here is behind-the-scenes. You may be using abstractions from Spring, but during the use phase most of the work with the framework is through proxies applied during the previous or initialization phase. 
+3) The **destruction phase** which of course occurs when the ApplicationContext starts to close by the calling of the close method on it.
+
+#### The initialization phase 
+Begins when the ApplicationContext itself is created. This can be done as in our example manually or via runtime like an application server.
+
+It is further broken down into two phases:
+1) The setup of the bean factory via its initializations. 
+2) The bean initialization itself and instantiation phase where your bean objects are actually created and then managed by the framework.
+
+![Initialization phase](./Initialization%20phase.png)
+
+#### The init phase: Loading bean definitions
+The first step of initialization is the loading of the Bean definitions. So in our big picture overview, we're in the box that says Bean Definitions Loaded.
+
+##### Bean Definition Sources
+
+There are several sources of Bean definitions. While we're talking about the lifecycle from a traditional flow, there is some slight variance here on how each of these gets loaded.
+* Java config is the most different of the loading of the Bean definitions because the objects are constructed as part of reading the definition. This configuration strategy may impact how these Beans are initialized.
+* XML configuration is still valid for configuring the application context. Though it isn't preferred anymore, it is still being used in many applications, especially some older ones. The XML file or files are read to prime the Bean definitions.
+* Component scanning and auto configuration. And this is very similar to the way that XML works, except for that instead of loading a file, your classes are scanned and then they actually at that point become available through the Bean definition.
 
 
+##### Priming the Factory
+
+So when we talk about priming the BeanFactory, we understand what these Bean definitions do.
+
+The first step is that the Bean definitions are loaded into the BeanFactory from all sources and in a running application, you don't just have to choose one. You can have some classes that are component scanned, and some that are configured through XML, and some through Java, and it's just the way that Spring is set up.
+
+So from this point an ID is used to create the index for the factory. And this is the only time anymore that we're going to use ID. It is only used as an index in the factory, everything else will be referenced by type or name.
+
+The BeanFactory only contains references at this point and that's an important point to note. Nothing has been instantiated. It's only references or pointers to the objects with metadata surrounding it about how to configure it.
+
+##### Phase completed
+
+There's a few things that we can say about the lifecycle of our application.
+- All Beans have been loaded into the BeanFactory.
+- Beans are just references and metadata at this point. There are no objects.
+- No objects being instantiated in your code is very important because at this point any manipulation we are going to do will actually be used to instantiate your objects, which is why it's important that the Beans are loaded and just referenced and that there's metadata because we have some processing that we can do in the next step.

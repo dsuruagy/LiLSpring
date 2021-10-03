@@ -12,6 +12,15 @@ public class OutputService {
     private final GreetingService greetingService;
     private final TimeService timeService;
 
+    /**
+     * Not default constructor used to instantiate OutputService, that requires two arguments.
+     * As there is no default constructor, the Autowired annotation is optional here, because
+     * Spring knows that it should auto wire dependencies to create a new instance.
+     *
+     * It was used to make it more explicit here.
+     * @param greetingService
+     * @param timeService
+     */
     @Autowired
     public OutputService(GreetingService greetingService, TimeService timeService){
         this.greetingService = greetingService;
